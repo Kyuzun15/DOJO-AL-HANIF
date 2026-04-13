@@ -1,0 +1,98 @@
+/* public/css/admin/dashboard.css */
+
+.admin-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.header-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.header-admin h1 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.user-tier {
+    font-size: 12px;
+    color: #7f8c8d;
+    background: #ecf0f1;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* Styling Tabel */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+    color: #444;
+}
+
+/* Status Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge-calon { background: #fff4e5; color: #ff9800; border: 1px solid #ffe0b2; }
+.badge-aktif { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+
+/* Group Tombol Aksi */
+.action-group {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+/* Tombol-tombol */
+.btn-logout { background: #34495e; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+.btn-logout:hover { background: #2c3e50; }
+
+.btn-wa { background: #25d366; color: white; text-decoration: none; padding: 7px 12px; border-radius: 5px; font-size: 12px; font-weight: bold; }
+.btn-terima { background: #3498db; color: white; border: none; padding: 7px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
+.btn-hapus { background: #ff7675; color: white; border: none; padding: 7px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
+
+.btn-wa:hover { background: #128c7e; }
+.btn-terima:hover { background: #2980b9; }
+.btn-hapus:hover { background: #d63031; }
+
+/* Notifikasi / Alert */
+.alert-success { background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #28a745; }
+.alert-error { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #dc3545; }
+
+.text-center { text-align: center; }

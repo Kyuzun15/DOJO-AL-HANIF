@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Member; // Memanggil model Member
+use App\Models\CalonMember; // Memanggil model Member
 
 class PendaftaranController extends Controller
 {
@@ -26,7 +26,7 @@ class PendaftaranController extends Controller
 
         // 2. Simpan data ke database tabel 'members'
         // (Status akan otomatis jadi 'calon' karena sudah kita atur di Migration)
-        Member::create($validatedData);
+        CalonMember::create($validatedData);
 
         // 3. Siapkan nomor tujuan dan format teks WhatsApp
         // Ganti nomor di bawah ini dengan nomor WA kamu (Admin)
