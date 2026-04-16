@@ -11,14 +11,18 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('calon_members', function (Blueprint $table) {
-            Schema::create('calon_members', function (Blueprint $table) {
-                $table->id();
-                $table->string('nama_lengkap');
-                $table->string('no_whatsapp');
-                $table->integer('umur')->nullable();
-                $table->string('sabuk')->nullable();
-                $table->timestamps();
-            });
+            $table->id();
+            $table->string('nama');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
+            $table->integer('berat_badan');
+            $table->integer('tinggi_badan');
+            $table->string('nama_ayah');
+            $table->string('no_hp_ayah');
+            $table->string('nama_ibu');
+            $table->string('no_hp_ibu');
+            $table->text('alamat');
+            $table->timestamps();
         });
     }
 

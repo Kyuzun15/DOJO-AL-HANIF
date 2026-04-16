@@ -1,86 +1,145 @@
-/* --- public/css/style.css --- */
-
-/* Reset dasar agar tampilan sama di semua browser */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Mengatur latar belakang dan memposisikan form di tengah layar */
+/* public/css/pendaftaran/daftar.css */
 body {
-    background-color: #f4f7f6;
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    padding: 40px 20px;
+    margin: 0;
 }
 
-/* Membuat kotak form (Card) */
-.form-card {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.form-container {
+    background: #ffffff;
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.form-card h2 {
-    text-align: center;
+.form-container h2 {
     color: #2c3e50;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 0;
 }
 
-/* Mengatur jarak antar input */
+.form-container p.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Alert Error (Jika ada data yang belum diisi) */
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #dc3545;
+    font-size: 14px;
+}
+
+.alert-danger ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Layout Form */
 .form-group {
     margin-bottom: 15px;
 }
 
-.form-group label {
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+label {
     display: block;
-    margin-bottom: 5px;
-    color: #34495e;
     font-weight: bold;
-    font-size: 14px;
+    color: #34495e;
+    margin-bottom: 6px;
+    font-size: 13px;
 }
 
-/* Desain kolom input */
-.form-control {
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.3s;
 }
 
-.form-control:focus {
-    border-color: #3498db;
+input:focus,
+textarea:focus {
     outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
-/* Desain Tombol Daftar */
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+
+fieldset legend {
+    font-weight: bold;
+    color: #2980b9;
+    padding: 0 10px;
+}
+
+/* Tombol */
 .btn-submit {
     width: 100%;
-    padding: 12px;
-    background-color: #e74c3c; /* Warna merah identik dengan karate/dojo */
+    background: #e74c3c;
     color: white;
+    padding: 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
     margin-top: 10px;
 }
 
 .btn-submit:hover {
-    background-color: #c0392b;
+    background: #c0392b;
 }
 
-/* Menyembunyikan jebakan bot (Honeypot) */
-.honeypot-field {
-    display: none;
+.btn-back {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #7f8c8d;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-back:hover {
+    text-decoration: underline;
+    color: #34495e;
+}
+
+/* Responsif untuk HP */
+@media (max-width: 500px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
 }

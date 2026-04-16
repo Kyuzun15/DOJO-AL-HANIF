@@ -14,9 +14,8 @@ class CalonMember extends Model
 
     // Kolom yang boleh diisi (Mass Assignment)
     protected $fillable = [
-        'nama_lengkap',
-        'no_whatsapp',
-        'umur',
-        'sabuk',
+        'nama', 'tempat_lahir', 'tanggal_lahir', 'berat_badan', 
+        'tinggi_badan', 'nama_ayah', 'no_hp_ayah', 'nama_ibu', 
+        'no_hp_ibu', 'alamat'
     ];
 }

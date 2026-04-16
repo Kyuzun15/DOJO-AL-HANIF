@@ -8,25 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     use HasFactory;
-
-    // Menentukan nama tabel
     protected $table = 'members';
 
     // Kolom yang boleh diisi
-    // Pastikan 'tanggal_diterima' masuk di sini agar bisa diisi saat proses pindah data
     protected $fillable = [
-        'nama_lengkap',
-        'no_whatsapp',
-        'umur',
-        'sabuk',
-        'tanggal_diterima',
+        'nama', 'tempat_lahir', 'tanggal_lahir', 'berat_badan', 
+        'tinggi_badan', 'nama_ayah', 'no_hp_ayah', 'nama_ibu', 
+        'no_hp_ibu', 'alamat', 'sabuk', 'status', 'tanggal_diterima', 'tanggal_dinonaktifkan'
     ];
 
-    /**
-     * Casting kolom tanggal_diterima agar otomatis menjadi objek Carbon/Date 
-     * sehingga mudah dimanipulasi (format tanggal dsb).
-     */
     protected $casts = [
         'tanggal_diterima' => 'datetime',
+        'tanggal_dinonaktifkan' => 'datetime',
+        'tanggal_lahir' => 'date',
     ];
+
+    // Relasi ke tabel Prestasi (1 Anggota bisa punya Banyak Prestasi)
+    public function prestasi()
+    {
+        return $this->hasMany(PrestasiMember::class);
+    }
 }

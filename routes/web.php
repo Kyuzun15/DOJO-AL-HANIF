@@ -4,52 +4,31 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PendaftaranController;
 
-/*
-|--------------------------------------------------------------------------
-| Jalur Publik (Pengunjung)
-|--------------------------------------------------------------------------
-*/
+Route::get('/', function () { return view('welcome'); });
 
-// Halaman Beranda (Tempat Easter Egg 'osu' berada)
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Halaman Form Pendaftaran (Input Data)
+// Pendaftaran
 Route::get('/daftar', [PendaftaranController::class, 'index']);
-// Proses Simpan + Redirect WA + Anti Spam (Throttle 3 kali per menit)
-Route::post('/daftar', [PendaftaranController::class, 'store'])->middleware('throttle:3,1');
+Route::post('/daftar', [PendaftaranController::class, 'store']);
+Route::get('/pendaftaran-sukses', [PendaftaranController::class, 'sukses']);
 
-
-/*
-|--------------------------------------------------------------------------
-| Jalur Rahasia (Autentikasi Admin)
-|--------------------------------------------------------------------------
-*/
-
-// Proses Login dari Modal Rahasia
+// Login/Logout
 Route::post('/pintu-rahasia', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
-
-/*
-|--------------------------------------------------------------------------
-| Jalur Khusus Admin (Terproteksi Login)
-|--------------------------------------------------------------------------
-*/
-
+// Dashboard Admin
 Route::middleware(['auth'])->group(function () {
-    
-    // Halaman Utama Admin
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
+    
+    // Calon
+    Route::post('/admin/calon/{id}/terima', [AuthController::class, 'terimaMember']);
+    Route::delete('/admin/calon/{id}/hapus', [AuthController::class, 'hapusCalon']);
 
-    // Fitur Kelola Anggota (Bisa dilakukan Tier 1 & Tier 2)
-    Route::post('/admin/member/{id}/terima', [AuthController::class, 'terimaMember']);
-    Route::delete('/admin/member/{id}/hapus', [AuthController::class, 'hapusMember']);
-
-});
-
-// Jalur Khusus Super Admin (Tier 1 Saja)
-Route::middleware(['auth', 'role:tier_1'])->group(function () {
-    // Fitur spesifik Tier 1 seperti kelola akun admin lain bisa ditaruh di sini nanti
+    // Anggota (Update Dasar & Status)
+    Route::put('/admin/anggota/{id}', [AuthController::class, 'updateAnggota']);
+    Route::post('/admin/anggota', [AuthController::class, 'storeAnggotaAktif']);
+    
+    // FITUR PRESTASI KHUSUS (Halaman Baru)
+    Route::get('/admin/anggota/{id}/prestasi', [AuthController::class, 'showPrestasi']); // <-- Rute Baru
+    Route::post('/admin/anggota/{id}/prestasi', [AuthController::class, 'tambahPrestasi']);
+    Route::delete('/admin/prestasi/{id}/hapus', [AuthController::class, 'hapusPrestasi']);
 });

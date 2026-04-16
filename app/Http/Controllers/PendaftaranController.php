@@ -3,48 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CalonMember; // Memanggil model Member
+use App\Models\CalonMember;
 
 class PendaftaranController extends Controller
 {
-    // Fungsi untuk menampilkan halaman form pendaftaran
     public function index()
     {
-        return view('pendaftaran.daftar'); // Ini akan memanggil file daftar.blade.php
+        return view('pendaftaran.daftar');
     }
 
-    // Fungsi untuk menangkap data, simpan ke database, dan lempar ke WA
     public function store(Request $request)
     {
-        // 1. Validasi: Memastikan data yang dikirim tidak ngawur
-        $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'no_whatsapp' => 'required|string|max:20',
-            'umur' => 'nullable|integer',
-            'sabuk' => 'nullable|string',
+        // 1. Validasi
+        $data = $request->validate([
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'berat_badan' => 'required|numeric',
+            'tinggi_badan' => 'required|numeric',
+            'nama_ayah' => 'required',
+            'no_hp_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'no_hp_ibu' => 'required',
+            'alamat' => 'required',
         ]);
 
-        // 2. Simpan data ke database tabel 'members'
-        // (Status akan otomatis jadi 'calon' karena sudah kita atur di Migration)
-        CalonMember::create($validatedData);
+        // 2. Simpan ke database
+        CalonMember::create($data);
 
-        // 3. Siapkan nomor tujuan dan format teks WhatsApp
-        // Ganti nomor di bawah ini dengan nomor WA kamu (Admin)
-        // Gunakan format 62 tanpa tanda + atau angka 0 di depan
-        $nomorAdmin = '6283895930746';
+        // 3. Rakit Pesan WhatsApp
+        // Ganti nomor ini dengan nomor WhatsApp Admin (gunakan awalan 62)
+        $no_admin = "6283895930746"; 
+        
+        $pesan = "Osu! Admin DOJO AL-HANIF, ada pendaftar baru:\n\n";
+        $pesan .= "Nama: " . $request->nama . "\n";
+        $pesan .= "TTL: " . $request->tempat_lahir . ", " . $request->tanggal_lahir . "\n";
+        $pesan .= "BB/TB: " . $request->berat_badan . "kg / " . $request->tinggi_badan . "cm\n";
+        $pesan .= "Nama Ayah: " . $request->nama_ayah . " (" . $request->no_hp_ayah . ")\n";
+        $pesan .= "Alamat: " . $request->alamat . "\n\n";
+        $pesan .= "Mohon segera dicek di Dashboard Admin.";
 
-        $pesan = "Osu! Halo Admin DOJO AL-HANIF,\n\n";
-        $pesan .= "Ada pendaftar calon anggota baru nih:\n";
-        $pesan .= "🥋 Nama: " . $request->nama_lengkap . "\n";
-        $pesan .= "📱 No WA: " . $request->no_whatsapp . "\n";
-        $pesan .= "🎂 Umur: " . ($request->umur ?? 'Tidak diisi') . "\n";
-        $pesan .= "🎗️ Sabuk: " . ($request->sabuk ?? 'Belum ada (Pemula)') . "\n\n";
-        $pesan .= "Tolong segera dikonfirmasi ya, Terima kasih!";
+        // Jadikan URL-friendly (mengubah spasi menjadi %20, dll)
+        $wa_link = "https://wa.me/" . $no_admin . "?text=" . urlencode($pesan);
 
-        // urlencode berfungsi mengubah spasi atau enter menjadi format link internet yang sah
-        $linkWhatsApp = "https://wa.me/{$nomorAdmin}?text=" . urlencode($pesan);
+        // 4. Redirect ke halaman sukses sambil membawa link WA
+        return redirect('/pendaftaran-sukses')->with('wa_link', $wa_link);
+    }
 
-        // 4. Lemparkan pendaftar ke aplikasi/web WhatsApp!
-        return redirect()->away($linkWhatsApp);
+    // Fungsi baru untuk menampilkan halaman sukses
+    public function sukses()
+    {
+        return view('pendaftaran.sukses');
     }
 }
