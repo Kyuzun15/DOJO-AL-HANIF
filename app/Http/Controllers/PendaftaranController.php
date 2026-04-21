@@ -18,7 +18,7 @@ class PendaftaranController extends Controller
         $data = $request->validate([
             'nama' => 'required',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'required|date_format:d/m/Y',
             'berat_badan' => 'required|numeric',
             'tinggi_badan' => 'required|numeric',
             'nama_ayah' => 'required',
@@ -26,21 +26,26 @@ class PendaftaranController extends Controller
             'nama_ibu' => 'required',
             'no_hp_ibu' => 'required',
             'alamat' => 'required',
+            'ukuran_baju' => 'required',
         ]);
 
+        // Konversi format tanggal_lahir dari d/m/Y ke Y-m-d untuk database
+        $data['tanggal_lahir'] = \Carbon\Carbon::createFromFormat('d/m/Y', $data['tanggal_lahir'])->format('Y-m-d');
+
         // 2. Simpan ke database
-        CalonMember::create($data);
+        $calon = CalonMember::create($data);
 
         // 3. Rakit Pesan WhatsApp
         // Ganti nomor ini dengan nomor WhatsApp Admin (gunakan awalan 62)
         $no_admin = "6283895930746"; 
         
         $pesan = "Osu! Admin DOJO AL-HANIF, ada pendaftar baru:\n\n";
-        $pesan .= "Nama: " . $request->nama . "\n";
-        $pesan .= "TTL: " . $request->tempat_lahir . ", " . $request->tanggal_lahir . "\n";
-        $pesan .= "BB/TB: " . $request->berat_badan . "kg / " . $request->tinggi_badan . "cm\n";
-        $pesan .= "Nama Ayah: " . $request->nama_ayah . " (" . $request->no_hp_ayah . ")\n";
-        $pesan .= "Alamat: " . $request->alamat . "\n\n";
+        $pesan .= "Nama: " . $calon->nama . "\n";
+        $pesan .= "TTL: " . $calon->tempat_lahir . ", " . $request->tanggal_lahir . "\n";
+        $pesan .= "BB/TB: " . $calon->berat_badan . "kg / " . $calon->tinggi_badan . "cm\n";
+        $pesan .= "Nama Ayah: " . $calon->nama_ayah . " (" . $calon->no_hp_ayah . ")\n";
+        $pesan .= "Alamat: " . $calon->alamat . "\n";
+        $pesan .= "Ukuran Baju: " . $calon->ukuran_baju . "\n\n";
         $pesan .= "Mohon segera dicek di Dashboard Admin.";
 
         // Jadikan URL-friendly (mengubah spasi menjadi %20, dll)

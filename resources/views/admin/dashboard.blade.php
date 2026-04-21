@@ -42,7 +42,7 @@
                     <tr>
                         <th>Nama</th>
                         <th>Tempat, Tgl Lahir</th>
-                        <th>Umur / BB / TB</th>
+                        <th>Umur / BB / TB / Baju</th>
                         <th>Orang Tua (No HP)</th>
                         <th>Aksi</th>
                     </tr>
@@ -53,7 +53,7 @@
                                 {{ $c->tempat_lahir }},<br>{{ \Carbon\Carbon::parse($c->tanggal_lahir)->format('d M Y') }}
                             </td>
                             <td style="color: #444;">{{ \Carbon\Carbon::parse($c->tanggal_lahir)->age }} Thn |
-                                {{ $c->berat_badan }}kg | {{ $c->tinggi_badan }}cm
+                                {{ $c->berat_badan }}kg | {{ $c->tinggi_badan }}cm | {{ $c->ukuran_baju }}
                             </td>
                             <td style="font-size: 13px; line-height: 1.5;">
                                 Ayah: {{ $c->nama_ayah }} (<a href="https://wa.me/{{ $c->no_hp_ayah }}" target="_blank"
@@ -97,7 +97,7 @@
                     <tr>
                         <th>Nama & Sabuk</th>
                         <th>Tempat, Tgl Lahir</th>
-                        <th>Umur / BB / TB</th>
+                        <th>Umur / BB / TB / Baju</th>
                         <th>Orang Tua (No HP)</th>
                         <th>Tgl Diterima</th>
                         <th>Prestasi</th>
@@ -116,12 +116,12 @@
                                 {{ $a->tempat_lahir }},<br>{{ \Carbon\Carbon::parse($a->tanggal_lahir)->format('d M Y') }}
                             </td>
                             <td style="color: #444;">{{ \Carbon\Carbon::parse($a->tanggal_lahir)->age }} Thn |
-                                {{ $a->berat_badan }}kg | {{ $a->tinggi_badan }}cm
+                                {{ $a->berat_badan }}kg | {{ $a->tinggi_badan }}cm | {{ $a->ukuran_baju }}
                             </td>
 
                             <td style="font-size: 13px; line-height: 1.5; color: #444;">
-                                Ayah: {{ $a->no_hp_ayah }}<br>
-                                Ibu: {{ $a->no_hp_ibu }}
+                                Ayah: {{ $a->nama_ayah }} (<a href="https://wa.me/{{ $a->no_hp_ayah }}" target="_blank" style="color:#25d366; text-decoration:none; font-weight:bold;">WA</a>)<br>
+                                Ibu: {{ $a->nama_ibu }} (<a href="https://wa.me/{{ $a->no_hp_ibu }}" target="_blank" style="color:#25d366; text-decoration:none; font-weight:bold;">WA</a>)
                             </td>
 
                             <td style="font-size: 13px; color: #444;">{{ $a->tanggal_diterima->format('d M Y') }}</td>
@@ -152,7 +152,7 @@
                     <tr>
                         <th>Nama & Sabuk</th>
                         <th>Tempat, Tgl Lahir</th>
-                        <th>Umur / BB / TB</th>
+                        <th>Umur / BB / TB / Baju</th>
                         <th>Orang Tua (No HP)</th>
                         <th>Dinonaktifkan</th>
                         <th>Prestasi</th>
@@ -171,12 +171,12 @@
                                 {{ $t->tempat_lahir }},<br>{{ \Carbon\Carbon::parse($t->tanggal_lahir)->format('d M Y') }}
                             </td>
                             <td style="color: #000000ff;">{{ \Carbon\Carbon::parse($t->tanggal_lahir)->age }} Thn |
-                                {{ $t->berat_badan }}kg | {{ $t->tinggi_badan }}cm
+                                {{ $t->berat_badan }}kg | {{ $t->tinggi_badan }}cm | {{ $t->ukuran_baju }}
                             </td>
 
                             <td style="font-size: 13px; line-height: 1.5; color: #000000ff;">
-                                Ayah: {{ $t->no_hp_ayah }}<br>
-                                Ibu: {{ $t->no_hp_ibu }}
+                                Ayah: {{ $t->nama_ayah }} (<a href="https://wa.me/{{ $t->no_hp_ayah }}" target="_blank" style="color:#25d366; text-decoration:none; font-weight:bold;">WA</a>)<br>
+                                Ibu: {{ $t->nama_ibu }} (<a href="https://wa.me/{{ $t->no_hp_ibu }}" target="_blank" style="color:#25d366; text-decoration:none; font-weight:bold;">WA</a>)
                             </td>
 
                             <td style="color: #c0392b; font-weight: bold; font-size: 13px;">
@@ -237,6 +237,10 @@
                     <div style="flex: 1;">
                         <label class="form-label">Tinggi Badan (Cm)</label>
                         <input type="number" name="tinggi_badan" class="form-input" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label class="form-label">Ukuran Baju</label>
+                        <input type="text" name="ukuran_baju" class="form-input" required placeholder="S/M/L...">
                     </div>
                 </div>
 
@@ -356,10 +360,14 @@
 
                     <div style="display: flex; gap: 15px;">
                         <div style="flex: 1;">
+                            <label class="form-label">Nama Ayah</label>
+                            <input type="text" name="nama_ayah" class="form-input" value="{{ $member->nama_ayah }}" required>
                             <label class="form-label">No HP Ayah</label>
                             <input type="text" name="no_hp_ayah" class="form-input" value="{{ $member->no_hp_ayah }}">
                         </div>
                         <div style="flex: 1;">
+                            <label class="form-label">Nama Ibu</label>
+                            <input type="text" name="nama_ibu" class="form-input" value="{{ $member->nama_ibu }}" required>
                             <label class="form-label">No HP Ibu</label>
                             <input type="text" name="no_hp_ibu" class="form-input" value="{{ $member->no_hp_ibu }}">
                         </div>
@@ -371,6 +379,9 @@
                         <option value="tidak_aktif" {{ $member->status == 'tidak_aktif' ? 'selected' : '' }}>🔴 TIDAK AKTIF
                             (Cuti/Keluar)</option>
                     </select>
+
+                    <label class="form-label">Ukuran Baju</label>
+                    <input type="text" name="ukuran_baju" class="form-input" value="{{ $member->ukuran_baju }}" required>
 
                     <label class="form-label">Alamat Rumah Baru</label>
                     <textarea name="alamat" class="form-input" rows="2">{{ $member->alamat }}</textarea>

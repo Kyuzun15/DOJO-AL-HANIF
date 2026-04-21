@@ -45,6 +45,7 @@ class AuthController extends Controller
             'nama_ibu' => $calon->nama_ibu,
             'no_hp_ibu' => $calon->no_hp_ibu,
             'alamat' => $calon->alamat,
+            'ukuran_baju' => $calon->ukuran_baju,
             'sabuk' => 'Belum punya sabuk',
             'status' => 'aktif',
             'tanggal_diterima' => now(),
@@ -74,8 +75,11 @@ class AuthController extends Controller
 
             'sabuk' => $request->sabuk,
             'alamat' => $request->alamat,
+            'ukuran_baju' => $request->ukuran_baju,
             'status' => $statusBaru,
+            'nama_ayah' => $request->nama_ayah,
             'no_hp_ayah' => $request->no_hp_ayah,
+            'nama_ibu' => $request->nama_ibu,
             'no_hp_ibu' => $request->no_hp_ibu,
         ]);
 
@@ -103,6 +107,7 @@ class AuthController extends Controller
             'nama_ibu' => 'required',
             'no_hp_ibu' => 'required',
             'alamat' => 'required',
+            'ukuran_baju' => 'required',
             'sabuk' => 'required',
         ]);
 
