@@ -36,7 +36,11 @@
                     </tr>
                     @foreach($members as $m)
                     <tr>
-                        <td data-label="NAMA">{{ strtoupper($m->nama) }}</td>
+                        <td data-label="NAMA">
+                            <a href="/profil-anggota/{{ $m->id }}" style="text-decoration: none; color: #b31b1b; font-weight: 700;">
+                                {{ strtoupper($m->nama) }}
+                            </a>
+                        </td>
                         <td data-label="TINGKATAN">{{ strtoupper($m->tingkatan_sabuk) === 'TINGKATAN' ? 'TINGKATAN' : strtoupper($m->tingkatan_sabuk) }}</td>
                         <td data-label="STATUS">
                             <span class="status-badge {{ $m->status == 'aktif' ? 'status-aktif' : 'status-nonaktif' }}">

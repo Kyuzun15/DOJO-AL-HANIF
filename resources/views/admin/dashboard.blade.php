@@ -215,8 +215,21 @@
             <form action="/admin/anggota" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <label class="form-label">Nama Lengkap</label>
-                <input type="text" name="nama" class="form-input" required>
+                <div style="display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px;">
+                    <div style="flex: 0 0 120px;">
+                        <label class="form-label">Foto Profil</label>
+                        <div style="width: 120px; height: 160px; background: #f0f0f0; border: 2px dashed #ccc; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <i class="fas fa-camera" style="font-size: 2rem; color: #ccc;"></i>
+                            <input type="file" name="foto" class="form-input" accept="image/*" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="previewImage(this, 'previewTambah')">
+                            <img id="previewTambah" style="display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                        </div>
+                        <small style="font-size: 10px; color: #999;">Maks 2MB (3:4 disarankan)</small>
+                    </div>
+                    <div style="flex: 1;">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" name="nama" class="form-input" required>
+                    </div>
+                </div>
 
                 <div style="display: flex; gap: 15px;">
                     <div style="flex: 1;">
@@ -314,11 +327,28 @@
                 <button type="button" class="btn bg-red" style="float: right; margin-top:-50px; padding: 6px 10px;"
                     onclick="closeModal('modalMember{{ $member->id }}')">Tutup X</button>
 
-                <form action="/admin/anggota/{{ $member->id }}" method="POST">
+                <form action="/admin/anggota/{{ $member->id }}" method="POST" enctype="multipart/form-data">
                     @csrf @method('PUT')
 
-                    <label class="form-label">Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-input" value="{{ $member->nama }}" required>
+                    <div style="display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px;">
+                        <div style="flex: 0 0 120px;">
+                            <label class="form-label">Foto Profil</label>
+                            <div style="width: 120px; height: 160px; background: #f0f0f0; border: 2px dashed #ccc; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                                @if($member->foto)
+                                    <img src="{{ Storage::url($member->foto) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    <i class="fas fa-camera" style="font-size: 2rem; color: #ccc;"></i>
+                                @endif
+                                <input type="file" name="foto" class="form-input" accept="image/*" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="previewImage(this, 'previewEdit{{ $member->id }}')">
+                                <img id="previewEdit{{ $member->id }}" style="display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                            </div>
+                            <small style="font-size: 10px; color: #999;">Klik untuk ganti (Maks 2MB)</small>
+                        </div>
+                        <div style="flex: 1;">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" name="nama" class="form-input" value="{{ $member->nama }}" required>
+                        </div>
+                    </div>
 
                     <div style="display: flex; gap: 15px;">
                         <div style="flex: 1;">
@@ -395,6 +425,19 @@
     @endforeach
 
     <script src="{{ asset('js/admin/dashboard.js') }}"></script>
+    <script>
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </body>
 
 </html>

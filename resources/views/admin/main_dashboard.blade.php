@@ -87,6 +87,12 @@
                 <h2 class="hub-card-title">Dashboard Kegiatan</h2>
                 <p class="hub-card-desc">Kelola agenda kegiatan dan jadwal agenda dojo.</p>
             </a>
+
+            <a href="/admin/pengurus" class="hub-card">
+                <i class="fas fa-sitemap hub-icon" style="color: #8e44ad;"></i>
+                <h2 class="hub-card-title">Dashboard Struktur</h2>
+                <p class="hub-card-desc">Kelola susunan organisasi dan data pengurus dojo.</p>
+            </a>
         </div>
 
         <div class="logout-btn-container">

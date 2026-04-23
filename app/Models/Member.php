@@ -12,7 +12,7 @@ class Member extends Model
 
     // Kolom yang boleh diisi
     protected $fillable = [
-        'nama', 'tempat_lahir', 'tanggal_lahir', 'berat_badan', 
+        'nama', 'foto', 'tempat_lahir', 'tanggal_lahir', 'berat_badan', 
         'tinggi_badan', 'nama_ayah', 'no_hp_ayah', 'nama_ibu', 
         'no_hp_ibu', 'alamat', 'ukuran_baju', 'sabuk', 'status', 'tanggal_diterima', 'tanggal_dinonaktifkan'
     ];

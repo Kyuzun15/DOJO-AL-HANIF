@@ -72,12 +72,10 @@ class AuthController extends Controller
         $statusLama = $member->status;
         $statusBaru = $request->status;
 
-        $member->update([
+        $data = [
             'nama' => $request->nama,
-            // TAMBAHAN: Menyimpan perubahan Tempat & Tanggal Lahir
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-
             'sabuk' => $request->sabuk,
             'alamat' => $request->alamat,
             'ukuran_baju' => $request->ukuran_baju,
@@ -86,7 +84,17 @@ class AuthController extends Controller
             'no_hp_ayah' => $request->no_hp_ayah,
             'nama_ibu' => $request->nama_ibu,
             'no_hp_ibu' => $request->no_hp_ibu,
-        ]);
+        ];
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($member->foto) {
+                Storage::disk('public')->delete($member->foto);
+            }
+            $data['foto'] = $request->file('foto')->store('member_foto', 'public');
+        }
+
+        $member->update($data);
 
         if ($statusLama == 'aktif' && $statusBaru == 'tidak_aktif') {
             $member->update(['tanggal_dinonaktifkan' => now()]);
@@ -114,7 +122,12 @@ class AuthController extends Controller
             'alamat' => 'required',
             'ukuran_baju' => 'required',
             'sabuk' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('member_foto', 'public');
+        }
 
         // 2. Set default status dan tanggal
         $data['status'] = 'aktif';

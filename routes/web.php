@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\PengurusController;
+use App\Http\Controllers\MemberProfileController;
 Route::get('/', function () { 
     $latestArticles = \App\Models\Artikel::orderBy('published_date', 'desc')->take(5)->get();
     $kegiatans = \App\Models\Kegiatan::where('event_date', '>=', now()->toDateString())->orderBy('event_date', 'asc')->get();
@@ -17,53 +19,8 @@ Route::post('/daftar', [PendaftaranController::class, 'store']);
 Route::get('/pendaftaran-sukses', [PendaftaranController::class, 'sukses']);
 
 // Profil Anggota (Publicly accessible)
-Route::get('/profil-anggota', function () {
-    $members = \App\Models\Member::orderBy('nama', 'asc')->get();
-
-    $beltOrder = [
-        'SABUK HITAM',
-        'SABUK COKLAT',
-        'SABUK UNGU',
-        'SABUK BIRU',
-        'SABUK HIJAU',
-        'SABUK KUNING',
-        'SABUK PUTIH',
-        'BELUM PUNYA SABUK',
-    ];
-
-    $groupedMembers = [];
-    foreach ($beltOrder as $belt) {
-        $groupedMembers[$belt] = [];
-    }
-
-    foreach ($members as $member) {
-        $sabukFull = $member->sabuk;
-        if (str_contains($sabukFull, ' - ')) {
-            $parts = explode(' - ', $sabukFull);
-            $tingkatan = $parts[0];
-            $warna = $parts[1];
-            
-            if (isset($groupedMembers[$warna])) {
-                $member->tingkatan_sabuk = $tingkatan;
-                $groupedMembers[$warna][] = $member;
-            }
-        } elseif ($sabukFull === 'Belum punya sabuk' || $sabukFull === null) {
-            $member->tingkatan_sabuk = '-';
-            if (isset($groupedMembers['BELUM PUNYA SABUK'])) {
-                $groupedMembers['BELUM PUNYA SABUK'][] = $member;
-            }
-        }
-    }
-
-    // Filter out empty groups so we don't display empty sections
-    foreach ($groupedMembers as $belt => $list) {
-        if (count($list) === 0) {
-            unset($groupedMembers[$belt]);
-        }
-    }
-
-    return view('profil', compact('groupedMembers'));
-});
+Route::get('/profil-anggota', [MemberProfileController::class, 'index']);
+Route::get('/profil-anggota/{id}', [MemberProfileController::class, 'show']);
 
 // Artikel (Public)
 Route::get('/artikel', [ArtikelController::class, 'index']);
@@ -71,6 +28,9 @@ Route::get('/artikel/{slug}', [ArtikelController::class, 'show']);
 
 // Kegiatan (Public)
 Route::get('/kegiatan/{slug}', [KegiatanController::class, 'show']);
+
+// Struktur Organisasi (Public)
+Route::get('/struktur-organisasi', [PengurusController::class, 'index']);
 
 // Login/Logout
 Route::post('/pintu-rahasia', [AuthController::class, 'login']);
@@ -109,4 +69,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/kegiatan/{id}/edit', [KegiatanController::class, 'edit']);
     Route::put('/admin/kegiatan/{id}', [KegiatanController::class, 'update']);
     Route::delete('/admin/kegiatan/{id}', [KegiatanController::class, 'destroy']);
+
+    // Admin Pengurus
+    Route::get('/admin/pengurus', [PengurusController::class, 'adminIndex']);
+    Route::get('/admin/pengurus/create', [PengurusController::class, 'create']);
+    Route::post('/admin/pengurus', [PengurusController::class, 'store']);
+    Route::get('/admin/pengurus/{id}/edit', [PengurusController::class, 'edit']);
+    Route::put('/admin/pengurus/{id}', [PengurusController::class, 'update']);
+    Route::delete('/admin/pengurus/{id}', [PengurusController::class, 'destroy']);
 });

@@ -27,6 +27,7 @@
     <div class="sidebar-content">
         <a href="/" class="sidebar-link"><i class="fas fa-home"></i> Beranda</a>
         <a href="/profil-anggota" class="sidebar-link"><i class="fas fa-users"></i> Profil Anggota</a>
+        <a href="/struktur-organisasi" class="sidebar-link"><i class="fas fa-sitemap"></i> Struktur Organisasi</a>
         <a href="/daftar" class="sidebar-link"><i class="fas fa-user-plus"></i> Pendaftaran Online</a>
         @auth
             <a href="/dashboard" class="sidebar-link"><i class="fas fa-columns"></i> Dashboard Admin</a>
