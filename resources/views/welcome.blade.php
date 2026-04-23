@@ -180,10 +180,10 @@
                         </div>
                     @empty
                         <div class="agenda-card" style="flex: 0 0 100%;">
-                            <div class="agenda-card-placeholder" style="aspect-ratio: 21/9; max-width: 800px; margin: 0 auto;">
+                            <div class="agenda-card-placeholder coming-soon-card">
                                 <i class="fas fa-hourglass-half"></i>
-                                <h3 style="margin: 0; font-family: 'Montserrat', sans-serif; font-size: 2rem;">COMING SOON</h3>
-                                <p style="font-size: 1rem; margin-top: 10px; color: #aaa;">Nantikan agenda kegiatan seru lainnya dari Dojo Al-Hanif!</p>
+                                <h3 style="margin: 0; font-family: 'Montserrat', sans-serif;">COMING SOON</h3>
+                                <p style="margin-top: 10px; color: #aaa;">Nantikan agenda kegiatan seru lainnya dari Dojo Al-Hanif!</p>
                             </div>
                         </div>
                     @endforelse
