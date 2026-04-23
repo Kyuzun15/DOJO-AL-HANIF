@@ -6,4 +6,15 @@ document.addEventListener("keydown", (e) => {
         secret = "";
     }
 });
-function tutupModal() { document.getElementById("loginModal").style.display = "none"; }
+
+function tutupModal() { 
+    const modal = document.getElementById("loginModal");
+    if (modal) modal.style.display = "none"; 
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('loginModal');
+    if (modal && modal.dataset.show === 'true') {
+        modal.style.display = 'flex';
+    }
+});

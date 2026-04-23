@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artikel & Kegiatan - DOJO AL-HANIF</title>
+    <title>{{ $kegiatan->title }} - DOJO AL-HANIF</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="{{ asset('css/beranda/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/beranda/artikel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/beranda/show-artikel.css') }}">
+    <style>
+        .agenda-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .agenda-meta i {
+            color: #d12e2e;
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body>
     @include('partials.navbar')
@@ -19,45 +32,31 @@
     @auth
         <div style="background-color: #f1f1f1; padding: 15px; text-align: center; border-bottom: 2px solid #ddd;">
             <span style="margin-right: 15px; font-weight: bold; color: #333;">✓ Mode Admin Aktif</span>
-            <a href="/admin/artikel/create" class="btn bg-green" style="padding: 10px 20px; font-weight: bold; text-decoration: none; color: black;">+ Buat Artikel Baru</a>
+            <a href="/admin/kegiatan/{{ $kegiatan->id }}/edit" class="btn bg-blue" style="padding: 10px 20px; font-weight: bold; text-decoration: none; color: black;">✏️ Edit Kegiatan Ini</a>
         </div>
     @endauth
 
-    <section class="artikel-header-section">
-        <h1 class="artikel-title">ARTIKEL & KEGIATAN</h1>
-        <p style="color: #666; font-family: 'Inter', sans-serif; margin-top: 10px;">Berita terbaru dan pengumuman kegiatan resmi dari Dojo Al-Hanif.</p>
-        <div style="margin-top: 20px;">
-            <a href="/" style="display: inline-block; padding: 10px 25px; background: #b31b1b; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; font-family: 'Inter', sans-serif; transition: 0.3s;"><i class="fas fa-home"></i> Kembali ke Beranda</a>
+    <div class="pr-detail-container">
+        <h1 class="pr-detail-title">{{ $kegiatan->title }}</h1>
+        <div class="agenda-meta">
+            <div><i class="fas fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($kegiatan->event_date)->format('d F Y') }}</div>
+            @if($kegiatan->location)
+            <div><i class="fas fa-map-marker-alt"></i> {{ $kegiatan->location }}</div>
+            @endif
         </div>
-    </section>
 
-    <div class="artikel-container">
-        @forelse($artikels as $artikel)
-            <div class="artikel-card">
-                @if($artikel->cover_image)
-                    <img src="{{ Storage::url($artikel->cover_image) }}" alt="{{ $artikel->title }}" class="artikel-card-img">
-                @else
-                    <div class="artikel-card-img" style="display:flex; align-items:center; justify-content:center; color:#aaa; font-size: 3rem;">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                @endif
-                <div class="artikel-card-body">
-                    <div class="artikel-card-date">{{ \Carbon\Carbon::parse($artikel->published_date)->format('d F Y') }}</div>
-                    <h3 class="artikel-card-title">{{ $artikel->title }}</h3>
-                    <div class="artikel-card-excerpt">
-                        {{ \Illuminate\Support\Str::words(strip_tags($artikel->content), 20, '...') }}
-                    </div>
-                    <a href="/artikel/{{ $artikel->slug }}" class="artikel-card-btn">Baca Selengkapnya</a>
-                </div>
-            </div>
-        @empty
-            <div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: #888;">
-                <h3>Belum ada artikel yang dipublikasikan.</h3>
-            </div>
-        @endforelse
+        @if($kegiatan->flyer_image)
+            <img src="{{ Storage::url($kegiatan->flyer_image) }}" alt="{{ $kegiatan->title }}" class="pr-detail-cover">
+        @endif
+
+        <div class="pr-detail-content">
+            {!! $kegiatan->description !!}
+        </div>
+
+        <a href="/" class="pr-back-btn">&larr; Kembali ke Beranda</a>
     </div>
 
-    <!-- Layout Footer based on image -->
+    <!-- Layout Footer -->
     <footer class="large-footer">
         <div class="footer-grid">
             <div class="footer-col">
@@ -83,7 +82,6 @@
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
-                <!-- Button Style to Match the CSS expected by index -->
                 <button class="btn-newsletter">NEWSLETTER INFO</button>
             </div>
         </div>

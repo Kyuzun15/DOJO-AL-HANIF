@@ -5,30 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
-use App\Models\PressRelease;
+use App\Models\Artikel;
 use Illuminate\Support\Facades\Storage;
 
-class PressReleaseController extends Controller
+class ArtikelController extends Controller
 {
-    // Publik: Daftar Press Release
+    // Publik: Daftar Artikel
     public function index()
     {
-        $pressReleases = PressRelease::orderBy('published_date', 'desc')->get();
-        return view('artikel.artikel', compact('pressReleases'));
+        $artikels = Artikel::orderBy('published_date', 'desc')->get();
+        return view('artikel.artikel', compact('artikels'));
     }
 
-    // Publik: Detail Press Release
+    // Publik: Detail Artikel
     public function show($slug)
     {
-        $pressRelease = PressRelease::where('slug', $slug)->firstOrFail();
-        return view('artikel.show-artikel', compact('pressRelease'));
+        $artikel = Artikel::where('slug', $slug)->firstOrFail();
+        return view('artikel.show-artikel', compact('artikel'));
     }
 
     // Admin: List
     public function adminIndex()
     {
-        $pressReleases = PressRelease::orderBy('published_date', 'desc')->get();
-        return view('admin.artikel.index', compact('pressReleases'));
+        $artikels = Artikel::orderBy('published_date', 'desc')->get();
+        return view('admin.artikel.index', compact('artikels'));
     }
 
     // Admin: Create Form
@@ -50,11 +50,11 @@ class PressReleaseController extends Controller
         $validated['slug'] = Str::slug($validated['title']) . '-' . time();
 
         if ($request->hasFile('cover_image')) {
-            $path = $request->file('cover_image')->store('press_releases', 'public');
+            $path = $request->file('cover_image')->store('artikel', 'public');
             $validated['cover_image'] = $path;
         }
 
-        PressRelease::create($validated);
+        Artikel::create($validated);
 
         return redirect('/admin/artikel')->with('success', 'Artikel berhasil ditambahkan!');
     }
@@ -62,14 +62,14 @@ class PressReleaseController extends Controller
     // Admin: Edit Form
     public function edit($id)
     {
-        $pressRelease = PressRelease::findOrFail($id);
-        return view('admin.artikel.edit', compact('pressRelease'));
+        $artikel = Artikel::findOrFail($id);
+        return view('admin.artikel.edit', compact('artikel'));
     }
 
     // Admin: Update Data
     public function update(Request $request, $id)
     {
-        $pressRelease = PressRelease::findOrFail($id);
+        $artikel = Artikel::findOrFail($id);
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -82,14 +82,14 @@ class PressReleaseController extends Controller
 
         if ($request->hasFile('cover_image')) {
             // Delete old image if exists
-            if ($pressRelease->cover_image) {
-                Storage::disk('public')->delete($pressRelease->cover_image);
+            if ($artikel->cover_image) {
+                Storage::disk('public')->delete($artikel->cover_image);
             }
-            $path = $request->file('cover_image')->store('press_releases', 'public');
+            $path = $request->file('cover_image')->store('artikel', 'public');
             $validated['cover_image'] = $path;
         }
 
-        $pressRelease->update($validated);
+        $artikel->update($validated);
 
         return redirect('/admin/artikel')->with('success', 'Artikel berhasil diperbarui!');
     }
@@ -97,13 +97,13 @@ class PressReleaseController extends Controller
     // Admin: Delete Data
     public function destroy($id)
     {
-        $pressRelease = PressRelease::findOrFail($id);
+        $artikel = Artikel::findOrFail($id);
         
-        if ($pressRelease->cover_image) {
-            Storage::disk('public')->delete($pressRelease->cover_image);
+        if ($artikel->cover_image) {
+            Storage::disk('public')->delete($artikel->cover_image);
         }
         
-        $pressRelease->delete();
+        $artikel->delete();
 
         return redirect('/admin/artikel')->with('success', 'Artikel berhasil dihapus!');
     }

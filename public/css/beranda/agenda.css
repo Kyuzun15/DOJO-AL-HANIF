@@ -1,0 +1,81 @@
+.agenda-slider-section {
+    padding: 80px 0;
+    background: #fff;
+    overflow: hidden;
+}
+.agenda-slider-container {
+    cursor: grab;
+    user-select: none;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+.agenda-slider-container:active {
+    cursor: grabbing;
+}
+.agenda-slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+.agenda-card {
+    flex: 0 0 calc(100% / 3);
+    padding: 15px;
+    box-sizing: border-box;
+}
+@media (max-width: 992px) {
+    .agenda-card {
+        flex: 0 0 50%;
+    }
+}
+@media (max-width: 600px) {
+    .agenda-card {
+        flex: 0 0 100%;
+    }
+}
+.agenda-card img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.agenda-card img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.agenda-card-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px;
+}
+.agenda-card-placeholder i {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: #d12e2e;
+}
+/* Style Tambahan untuk Centering */
+.track-centered {
+    justify-content: center !important;
+    width: 100% !important;
+    transform: none !important;
+}
+.card-single {
+    flex: 0 0 450px !important;
+    max-width: 100% !important;
+}
+@media (max-width: 600px) {
+    .card-single {
+        flex: 0 0 100% !important;
+    }
+}

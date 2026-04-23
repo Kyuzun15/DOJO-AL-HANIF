@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Press Release - DOJO AL-HANIF</title>
+    <title>Edit Artikel - DOJO AL-HANIF</title>
     <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
     <style>
         .ck-editor__editable_inline {
@@ -21,25 +21,25 @@
         <a href="/admin/artikel" class="link-back">&larr; Batal & Kembali</a>
 
         <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 20px;">
-            <form action="/admin/artikel/{{ $pressRelease->id }}" method="POST" enctype="multipart/form-data">
+            <form action="/admin/artikel/{{ $artikel->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label class="form-label">Judul Artikel</label>
-                    <input type="text" name="title" class="form-input" required value="{{ old('title', $pressRelease->title) }}">
+                    <input type="text" name="title" class="form-input" required value="{{ old('title', $artikel->title) }}">
                 </div>
 
                 <div style="display: flex; gap: 15px; margin-bottom: 20px;">
                     <div style="flex: 1;">
                         <label class="form-label">Tanggal Publikasi</label>
-                        <input type="date" name="published_date" class="form-input" required value="{{ old('published_date', $pressRelease->published_date) }}">
+                        <input type="date" name="published_date" class="form-input" required value="{{ old('published_date', $artikel->published_date) }}">
                     </div>
                     <div style="flex: 1;">
                         <label class="form-label">Cover Image (Upload baru untuk mengganti)</label>
                         <input type="file" name="cover_image" class="form-input" accept="image/*">
-                        @if($pressRelease->cover_image)
+                        @if($artikel->cover_image)
                             <div style="margin-top: 10px;">
-                                <img src="{{ Storage::url($pressRelease->cover_image) }}" alt="Preview" style="max-height: 100px; border-radius: 5px;">
+                                <img src="{{ Storage::url($artikel->cover_image) }}" alt="Preview" style="max-height: 100px; border-radius: 5px;">
                                 <small style="display:block; color:#777;">Gambar saat ini</small>
                             </div>
                         @endif
@@ -48,7 +48,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Isi Konten Artikel</label>
-                    <textarea name="content" id="editor">{{ old('content', $pressRelease->content) }}</textarea>
+                    <textarea name="content" id="editor">{{ old('content', $artikel->content) }}</textarea>
                 </div>
 
                 <button type="submit" class="btn bg-blue" style="width:100%; padding:15px; font-size:16px;">Simpan Perubahan</button>

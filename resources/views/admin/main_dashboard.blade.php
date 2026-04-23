@@ -79,7 +79,13 @@
             <a href="/admin/artikel" class="hub-card">
                 <i class="fas fa-newspaper hub-icon"></i>
                 <h2 class="hub-card-title">Dashboard Artikel</h2>
-                <p class="hub-card-desc">Kelola data kegiatan, pengumuman, dan press release.</p>
+                <p class="hub-card-desc">Kelola pengumuman dan berita press release.</p>
+            </a>
+
+            <a href="/admin/kegiatan" class="hub-card">
+                <i class="fas fa-calendar-check hub-icon" style="color: #27ae60;"></i>
+                <h2 class="hub-card-title">Dashboard Kegiatan</h2>
+                <p class="hub-card-desc">Kelola agenda kegiatan dan jadwal agenda dojo.</p>
             </a>
         </div>
 

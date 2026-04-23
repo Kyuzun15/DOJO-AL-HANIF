@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $pressRelease->title }} - DOJO AL-HANIF</title>
+    <title>{{ $artikel->title }} - DOJO AL-HANIF</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,22 +19,22 @@
     @auth
         <div style="background-color: #f1f1f1; padding: 15px; text-align: center; border-bottom: 2px solid #ddd;">
             <span style="margin-right: 15px; font-weight: bold; color: #333;">✓ Mode Admin Aktif</span>
-            <a href="/admin/artikel/{{ $pressRelease->id }}/edit" class="btn bg-blue" style="padding: 10px 20px; font-weight: bold; text-decoration: none; color: black;">✏️ Edit Artikel Ini</a>
+            <a href="/admin/artikel/{{ $artikel->id }}/edit" class="btn bg-blue" style="padding: 10px 20px; font-weight: bold; text-decoration: none; color: black;">✏️ Edit Artikel Ini</a>
         </div>
     @endauth
 
     <div class="pr-detail-container">
-        <h1 class="pr-detail-title">{{ $pressRelease->title }}</h1>
+        <h1 class="pr-detail-title">{{ $artikel->title }}</h1>
         <div class="pr-detail-meta">
-            <i class="fas fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($pressRelease->published_date)->format('d F Y') }}
+            <i class="fas fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($artikel->published_date)->format('d F Y') }}
         </div>
 
-        @if($pressRelease->cover_image)
-            <img src="{{ Storage::url($pressRelease->cover_image) }}" alt="{{ $pressRelease->title }}" class="pr-detail-cover">
+        @if($artikel->cover_image)
+            <img src="{{ Storage::url($artikel->cover_image) }}" alt="{{ $artikel->title }}" class="pr-detail-cover">
         @endif
 
         <div class="pr-detail-content">
-            {!! $pressRelease->content !!}
+            {!! $artikel->content !!}
         </div>
 
         <a href="/artikel" class="pr-back-btn">&larr; Kembali ke Daftar Artikel</a>

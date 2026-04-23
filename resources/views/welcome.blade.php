@@ -14,6 +14,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/beranda/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/beranda/popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/beranda/agenda.css') }}">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
         <div class="hero-content">
             <h1 class="hero-title">
                 Selamat Datang<br>
-                Di <span class="text-accent">DOJO AL-<br>HANIF</span>
+                Di <span class="text-accent">DOJO AL-HANIF</span>
             </h1>
             <p class="hero-subtitle">
                 Membangun karakter melalui kedisiplinan Bushido. Kami melatih tubuh dan jiwa untuk mencapai harmoni sempurna antara kekuatan dan kerendahan hati.
@@ -155,9 +156,76 @@
         </div>
     </section>
 
+    <!-- SLIDER AGENDA KEGIATAN -->
+    <section class="agenda-slider-section">
+        <div class="container">
+            <span class="section-subtitle" style="text-align: center; display: block;">UPCOMING EVENTS</span>
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">AGENDA KEGIATAN</h2>
+            
+            <div class="agenda-slider-container" id="agendaSliderContainer">
+                <div class="agenda-slider-track {{ $kegiatans->count() < 3 ? 'track-centered' : '' }}" id="agendaSliderTrack">
+                    @forelse($kegiatans as $keg)
+                        <div class="agenda-card {{ $kegiatans->count() == 1 ? 'card-single' : '' }}">
+                            <a href="/kegiatan/{{ $keg->slug }}">
+                                @if($keg->flyer_image)
+                                    <img src="{{ Storage::url($keg->flyer_image) }}" alt="{{ $keg->title }}">
+                                @else
+                                    <div class="agenda-card-placeholder">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <h4 style="margin: 0; font-family: 'Montserrat', sans-serif;">{{ strtoupper($keg->title) }}</h4>
+                                        <p style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">{{ \Carbon\Carbon::parse($keg->event_date)->format('d M Y') }}</p>
+                                    </div>
+                                @endif
+                            </a>
+                        </div>
+                    @empty
+                        <div class="agenda-card" style="flex: 0 0 100%;">
+                            <div class="agenda-card-placeholder" style="aspect-ratio: 21/9; max-width: 800px; margin: 0 auto;">
+                                <i class="fas fa-hourglass-half"></i>
+                                <h3 style="margin: 0; font-family: 'Montserrat', sans-serif; font-size: 2rem;">COMING SOON</h3>
+                                <p style="font-size: 1rem; margin-top: 10px; color: #aaa;">Nantikan agenda kegiatan seru lainnya dari Dojo Al-Hanif!</p>
+                            </div>
+                        </div>
+                    @endforelse
+
+                    @if($kegiatans->count() >= 3)
+                        {{-- Duplikasi untuk infinite loop --}}
+                        @foreach($kegiatans as $keg)
+                            <div class="agenda-card">
+                                <a href="/kegiatan/{{ $keg->slug }}">
+                                    @if($keg->flyer_image)
+                                        <img src="{{ Storage::url($keg->flyer_image) }}" alt="{{ $keg->title }}">
+                                    @else
+                                        <div class="agenda-card-placeholder">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <h4 style="margin: 0; font-family: 'Montserrat', sans-serif;">{{ strtoupper($keg->title) }}</h4>
+                                            <p style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">{{ \Carbon\Carbon::parse($keg->event_date)->format('d M Y') }}</p>
+                                        </div>
+                                    @endif
+                                </a>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- KEGIATAN TERBARU SECTION -->
     @if($latestArticles->count() > 0)
-    <section class="kegiatan-section" id="home-artikel-section" style="background-image: url('{{ $latestArticles[0]->cover_image ? Storage::url($latestArticles[0]->cover_image) : asset('img/kegiatan_bg2_1776780785146.png') }}'); transition: background-image 0.5s ease-in-out;">
+    @php
+        $artikelFormatted = $latestArticles->map(function($art) {
+            return [
+                'title' => strtoupper($art->title),
+                'excerpt' => \Illuminate\Support\Str::words(strip_tags($art->content), 20, '...'),
+                'slug' => $art->slug,
+                'cover' => $art->cover_image ? Storage::url($art->cover_image) : asset('img/kegiatan_bg2_1776780785146.png')
+            ];
+        });
+    @endphp
+    <section class="kegiatan-section" id="home-artikel-section" 
+             style="background-image: url('{{ $latestArticles[0]->cover_image ? Storage::url($latestArticles[0]->cover_image) : asset('img/kegiatan_bg2_1776780785146.png') }}'); transition: background-image 0.5s ease-in-out;"
+             data-artikels='@json($artikelFormatted)'>
         <div class="kegiatan-overlay"></div>
         <div class="kegiatan-content">
             <div class="kegiatan-box">
@@ -181,53 +249,6 @@
             </div>
         </div>
     </section>
-
-    @if($latestArticles->count() > 1)
-    <script>
-        const artikelData = [
-            @foreach($latestArticles as $art)
-            {
-                title: @json(strtoupper($art->title)),
-                excerpt: @json(\Illuminate\Support\Str::words(strip_tags($art->content), 20, '...')),
-                slug: @json($art->slug),
-                cover: @json($art->cover_image ? Storage::url($art->cover_image) : asset('img/kegiatan_bg2_1776780785146.png'))
-            },
-            @endforeach
-        ];
-        
-        let currentArtikelIndex = 0;
-        
-        function updateArtikelDisplay() {
-            const art = artikelData[currentArtikelIndex];
-            document.getElementById('home-artikel-section').style.backgroundImage = `url('${art.cover}')`;
-            
-            // simple fade effect for text
-            const titleEl = document.getElementById('home-artikel-title');
-            const excerptEl = document.getElementById('home-artikel-excerpt');
-            
-            titleEl.style.opacity = 0;
-            excerptEl.style.opacity = 0;
-            
-            setTimeout(() => {
-                titleEl.innerText = art.title;
-                excerptEl.innerText = art.excerpt;
-                document.getElementById('home-artikel-link').href = `/artikel/${art.slug}`;
-                titleEl.style.opacity = 1;
-                excerptEl.style.opacity = 1;
-            }, 300);
-        }
-        
-        function nextArtikel() {
-            currentArtikelIndex = (currentArtikelIndex + 1) % artikelData.length;
-            updateArtikelDisplay();
-        }
-        
-        function prevArtikel() {
-            currentArtikelIndex = (currentArtikelIndex - 1 + artikelData.length) % artikelData.length;
-            updateArtikelDisplay();
-        }
-    </script>
-    @endif
 
     @else
     <section class="kegiatan-section" style="background-image: url('{{ asset('img/kegiatan_bg2_1776780785146.png') }}');">
@@ -283,7 +304,7 @@
     </footer>
 
     <!-- MODAL LOGIN RAHASIA -->
-    <div id="loginModal" class="modal-overlay">
+    <div id="loginModal" class="modal-overlay" data-show="{{ session('error') ? 'true' : 'false' }}">
         <div class="modal-box">
             <span class="close-btn" onclick="tutupModal()" style="float: right; cursor: pointer; color: #666; font-size: 20px;">&times;</span>
             <h2 style="font-family: 'Montserrat', sans-serif;">Masuk Ruang Admin</h2>
@@ -307,12 +328,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/beranda/popup.js') }}"></script>
-    <script>
-        window.onload = function() {
-            if ("{{ session('error') }}") {
-                document.getElementById("loginModal").style.display = "flex";
-            }
-        };
-    </script>
+    <script src="{{ asset('js/beranda/artikel_slider.js') }}"></script>
+    <script src="{{ asset('js/beranda/agenda.js') }}"></script>
 </body>
 </html>
