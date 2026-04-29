@@ -22,7 +22,7 @@
     @include('partials.navbar')
 
     <!-- HERO SECTION -->
-    <section class="hero-section" style="background-image: url('{{ asset('img/hero_bg_1776780702375.png') }}');">
+    <section class="hero-section" style="background-image: url('{{ asset('img/background.jpeg') }}');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">
@@ -30,7 +30,8 @@
                 Di <span class="text-accent">DOJO AL-HANIF</span>
             </h1>
             <p class="hero-subtitle">
-                Membangun karakter melalui kedisiplinan Bushido. Kami melatih tubuh dan jiwa untuk mencapai harmoni sempurna antara kekuatan dan kerendahan hati.
+               Karate melatih fisik, disiplin, dan bela diri untuk membentuk karakter tangguh yang berakhlak mulia.
+               Bersama <b>Dojo Al-Hanif,</b> mari tumbuh lebih sehat, tangguh, dan berprestasi.
             </p>
             <div class="hero-buttons">
                 @auth
@@ -60,14 +61,23 @@
                 <span class="section-subtitle">THE LEGACY</span>
                 <h2 class="section-title" style="margin-bottom: 20px;">SEJARAH</h2>
                 <p>
-                    Dojo Al-Hanif didirikan dengan semangat untuk melestarikan nilai-nilai murni bela diri tradisional di tengah gempuran modernisasi. Berawal dari sekelompok kecil praktisi yang mencari kedalaman spiritual dalam teknik, kini kami berkembang menjadi pusat unggulan pengembangan karakter.
+                    Dojo Al-Hanif didirikan pada tahun 2015 sebagai wujud komitmen dalam membina generasi muda melalui seni bela diri karate. Pada awal perjalanannya, Dojo Al-Hanif mengadopsi aliran KASIDO sebagai dasar pembinaan teknik dan karakter para karateka. Selama beberapa tahun, dojo ini tumbuh dan berkembang dengan penuh semangat, menanamkan nilai disiplin, keberanian, serta sportivitas kepada para anggotanya.
+                </p>
+                <p>Seiring berjalannya waktu dan berbagai dinamika yang terjadi dalam organisasi, pada tahun 2021 aliran KASIDO secara resmi ditutup. Momen ini menjadi titik penting sekaligus peluang untuk melakukan pembaruan arah dan identitas dojo. Dengan penuh keyakinan dan semangat kembali kepada akar, Dojo Al-Hanif kemudian beralih dan kembali kepada aliran KEI SHIN KAN—sebuah aliran yang memiliki nilai historis dan emosional bagi pendirinya, Mulyono, yang sebelumnya pernah menimba ilmu dan berkembang dalam aliran tersebut.
                 </p>
                 <p>
-                    Selama bertahun-tahun, Al-Hanif telah mencetak atlet-atlet berprestasi dan individu yang tangguh di masyarakat, memegang teguh prinsip kejujuran, keberanian, dan rasa hormat yang menjadi fondasi setiap gerakan kami.
+                    Langkah ini tidak hanya sekadar perubahan aliran, tetapi juga menjadi upaya untuk memperkuat kualitas pembinaan serta menjaga kemurnian nilai-nilai karate yang berlandaskan teknik, etika, dan pembentukan akhlak. Pada tahun yang sama, Dojo Al-Hanif secara resmi bergabung dengan Pengurus Provinsi (Pengprov) Jawa Barat, sehingga keberadaannya semakin diakui secara organisatoris dan memiliki landasan yang kuat dalam struktur pembinaan olahraga karate di tingkat daerah.
                 </p>
+                <p>
+                    Sejak saat itu, Dojo Al-Hanif berkembang menjadi salah satu cikal bakal dan pusat pengembangan aliran KEI SHIN KAN di Kabupaten Bekasi. Dengan semangat kebersamaan, profesionalisme, dan dedikasi tinggi, dojo ini terus berkomitmen mencetak atlet-atlet berprestasi yang tidak hanya unggul dalam kompetisi, tetapi juga memiliki karakter kuat, menjunjung tinggi sumpah karate, serta berakhlak mulia.
+                </p>
+                <p>
+                    Hingga saat ini, Dojo Al-Hanif terus melangkah maju, menjadi wadah pembinaan yang tidak hanya berfokus pada kemampuan fisik, tetapi juga pada pembentukan mental dan spiritual, demi melahirkan generasi karateka yang tangguh dan berintegritas.
+                </p>
+            
             </div>
             <div class="sejarah-image">
-                <img src="{{ asset('img/sejarah_img_1776780723639.png') }}" alt="Sejarah Dojo Al-Hanif">
+                <img src="{{ asset('img/sejarohh.jpeg') }}" alt="Sejarah Dojo Al-Hanif">
             </div>
         </div>
     </section>
@@ -79,43 +89,43 @@
             <div class="vm-grid">
                 <div class="visi-box">
                     <h3>VISI</h3>
-                    <p>Menjadi dojo rujukan utama dalam pembentukan generasi yang mandiri, berkarakter bushido, dan unggul dalam prestasi nasional maupun internasional.</p>
+                    <p>Mewujudkan Semua Anggota karate yang berprestasi, sehat jasmani dan rohani, teguh memegang janji serta sumpah karate, dan berakhlak mulia.</p>
                 </div>
                 <div class="misi-wrapper">
                     <h3>MISI</h3>
                     <div class="misi-grid">
                         <div class="misi-item">
                             <span class="misi-num">01</span>
-                            <p>Menyelenggarakan latihan teknis karate yang disiplin dan sistematis.</p>
+                            <p>Menyelenggarakan latihan karate secara disiplin, terarah, dan berkelanjutan untuk meningkatkan prestasi atlet.</p>
                         </div>
                         <div class="misi-item">
                             <span class="misi-num">02</span>
-                            <p>Menanamkan nilai kejujuran (Gi) dalam setiap interaksi.</p>
+                            <p>Membina kesehatan fisik dan mental anggota melalui program latihan yang seimbang dan profesional.</p>
                         </div>
                         <div class="misi-item">
                             <span class="misi-num">03</span>
-                            <p>Membangun keberanian (Yu) untuk menghadapi tantangan hidup.</p>
+                            <p>Menanamkan nilai-nilai sumpah karate dalam setiap aktivitas latihan dan kehidupan sehari-hari.</p>
                         </div>
                         <div class="misi-item">
                             <span class="misi-num">04</span>
-                            <p>Mengajarkan kebajikan (Jin) dan kasih sayang antar sesama.</p>
+                            <p>Membentuk karakter atlet yang jujur, bertanggung jawab, dan berakhlak baik.</p>
                         </div>
                         <div class="misi-item">
                             <span class="misi-num">05</span>
-                            <p>Menjunjung tinggi kesopanan (Rei) dalam etiket dojo.</p>
+                            <p>Mendorong partisipasi atlet dalam berbagai kejuaraan untuk mengasah kemampuan dan mental bertanding.</p>
                         </div>
                         <div class="misi-item">
                             <span class="misi-num">06</span>
-                            <p>Melatih ketulusan (Makoto) dalam perkataan dan perbuatan.</p>
+                            <p>Membangun lingkungan dojo yang solid, saling menghormati, dan menjunjung tinggi sportivitas.</p>
                         </div>
                          <div class="misi-item">
                             <span class="misi-num">07</span>
-                            <p>Menjaga kehormatan (Meiyo) institusi dan diri sendiri.</p>
+                            <p>Menjalin kerja sama dengan orang tua, sekolah, dan pihak terkait untuk mendukung perkembangan atlet.</p>
                         </div>
-                         <div class="misi-item">
+                         <!-- <div class="misi-item">
                             <span class="misi-num">08</span>
                             <p>Menumbuhkan loyalitas (Chugi) kepada guru dan rekan sejawat.</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -125,12 +135,42 @@
     <!-- TUJUAN & BENEFIT SECTION -->
     <section class="section-padding tujuan-benefit-wrapper">
         <div class="container">
-            <hr class="tujuan-divider">
             <div class="tujuan-section">
-                <h2 class="section-title" style="margin-bottom: 20px;">TUJUAN</h2>
-                <p class="tujuan-text">
-                    Tujuan utama kami adalah menciptakan lingkungan yang mendukung transformasi fisik dan mental. Kami ingin setiap anggota Dojo Al-Hanif tidak hanya menjadi petarung yang handal di matras, tetapi juga menjadi pemimpin yang bijaksana dalam kehidupan sehari-hari, mampu mengaplikasikan filosofi bela diri untuk kebaikan masyarakat luas.
-                </p>
+                <h2 class="section-title" style="margin-bottom: 30px;">TUJUAN</h2>
+                <div class="tujuan-grid">
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">1</span>
+                        <p>Menghasilkan atlet karate yang mampu meraih prestasi di tingkat daerah, nasional, hingga internasional.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">2</span>
+                        <p>Membentuk anggota yang memiliki kondisi fisik yang kuat, sehat, dan bugar serta mental yang tangguh.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">3</span>
+                        <p>Menanamkan dan mengamalkan nilai-nilai sumpah karate dalam kehidupan sehari-hari.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">4</span>
+                        <p>Membentuk pribadi yang disiplin, jujur, bertanggung jawab, dan berakhlak mulia.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">5</span>
+                        <p>Mengembangkan kemampuan teknik, strategi, dan mental bertanding secara optimal.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">6</span>
+                        <p>Menciptakan lingkungan latihan yang aman, nyaman, dan penuh semangat kebersamaan.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">7</span>
+                        <p>Meningkatkan rasa percaya diri, sportivitas, dan jiwa kepemimpinan pada setiap anggota.</p>
+                    </div>
+                    <div class="tujuan-item">
+                        <span class="tujuan-num">8</span>
+                        <p>Menjadi wadah pembinaan generasi muda yang positif dan produktif melalui olahraga karate.</p>
+                    </div>
+                </div>
             </div>
 
             <div class="benefit-section">
@@ -138,21 +178,35 @@
                 <div class="benefit-grid">
                     <div class="benefit-card">
                         <div class="benefit-icon"><i class="fas fa-star"></i></div>
-                        <h3>HOBI</h3>
-                        <p>Salurkan minat Anda dalam lingkungan yang positif. Karate bukan sekadar olahraga, melainkan gaya hidup yang penuh dengan eksplorasi teknik dan budaya.</p>
+                        <h3>PRESTASI</h3>
+                        <p>Bukan sekadar menang lomba, tapi untuk melatih disiplin dan membentuk mental tangguh yang pantang menyerah serta jujur (sportif).</p>
                     </div>
                     <div class="benefit-card">
                         <div class="benefit-icon"><i class="fas fa-bullseye"></i></div>
-                        <h3>KOMPETENSI</h3>
-                        <p>Asah kemampuan bela diri Anda di bawah bimbingan sensei berpengalaman. Kami menyiapkan kurikulum atlet untuk jenjang kompetisi prestasi.</p>
+                        <h3>BELA DIRI</h3>
+                        <p>Agar punya kemampuan melindungi diri saat bahaya. Namun, poin pentingnya adalah pengendalian diri, sehingga tidak sembarangan menggunakan kekuatan dan tidak mudah terpancing emosi.</p>
                     </div>
                     <div class="benefit-card">
                         <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
                         <h3>KESEHATAN</h3>
-                        <p>Tingkatkan stamina, fleksibilitas, dan kekuatan tubuh secara menyeluruh. Latihan rutin kami dirancang untuk kesehatan jantung dan manajemen stres.</p>
+                        <p>Membuat tubuh lebih kuat, lincah, dan bugar. Selain fisik jadi sehat, karate juga bermanfaat untuk mengurangi stres dan melatih fokus pikiran.</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- TEMPAT LATIHAN SECTION -->
+    <section class="section-padding tempat-latihan-section">
+        <div class="container">
+            <h2 class="section-title">TEMPAT LATIHAN</h2>
+            <a href="https://maps.app.goo.gl/BK1L5HAc82auVXNM7" target="_blank" class="maps-container">
+                <div class="maps-content">
+                    <i class="fas fa-map-location-dot"></i>
+                    <p>Klik untuk membuka lokasi kami di Google Maps</p>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5626969057434!2d107.0169!3d-6.2349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698a8f8f8f8f8f%3A0x8f8f8f8f8f8f8f8f!2sDojo%20Al-Hanif!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </a>
         </div>
     </section>
 
