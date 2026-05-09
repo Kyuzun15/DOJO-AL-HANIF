@@ -336,7 +336,7 @@
             <div class="tree-row">
                 <div style="position: relative;">
                     <div class="vertical-line"></div>
-                    ${createCard(biodata.bimbingan_presiden_1, 'fa-trophy', 'BIMBINGAN PRESIDEN')}
+                    ${createCard(biodata.bimbingan_presiden_1, 'fa-trophy', 'BIMBINGAN PRESTASI (KETUA)')}
                 </div>
                 <div style="position: relative;">
                     <div class="vertical-line"></div>
@@ -344,7 +344,7 @@
                 </div>
                 <div style="position: relative;">
                     <div class="vertical-line"></div>
-                    ${createCard(biodata.bimbingan_presiden_2, 'fa-medal', 'BIMBINGAN PRESIDEN')}
+                    ${createCard(biodata.bimbingan_presiden_2, 'fa-medal', 'BIMBINGAN PRESTASI (WAKIL KETUA)')}
                 </div>
             </div>
         `;

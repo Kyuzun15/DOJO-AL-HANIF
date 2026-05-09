@@ -23,9 +23,9 @@
                             <option value="ketua" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'ketua' ? 'selected' : '' }}>KETUA</option>
                             <option value="bendahara" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bendahara' ? 'selected' : '' }}>BENDAHARA</option>
                             <option value="sekretaris" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'sekretaris' ? 'selected' : '' }}>SEKRETARIS</option>
-                            <option value="bimbingan_presiden_1" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bimbingan_presiden_1' ? 'selected' : '' }}>BIMBINGAN PRESIDEN (1)</option>
-                            <option value="bidang_usaha" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bidang_usaha' ? 'selected' : '' }}>BIDANG USAHA (2)</option>
-                            <option value="bimbingan_presiden_2" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bimbingan_presiden_2' ? 'selected' : '' }}>BIMBINGAN PRESIDEN (3)</option>
+                            <option value="bimbingan_presiden_1" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bimbingan_presiden_1' ? 'selected' : '' }}>BIMBINGAN PRESTASI (KETUA)</option>
+                            <option value="bidang_usaha" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bidang_usaha' ? 'selected' : '' }}>BIDANG USAHA</option>
+                            <option value="bimbingan_presiden_2" {{ old('kode_jabatan', $pengurus->kode_jabatan) == 'bimbingan_presiden_2' ? 'selected' : '' }}>BIMBINGAN PRESTASI (WAKIL KETUA)</option>
                         </select>
                         @error('kode_jabatan') <small style="color: red;">{{ $message }}</small> @enderror
                     </div>
