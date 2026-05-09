@@ -747,6 +747,37 @@ a {
         bottom: -20px;
         right: 0;
     }
+
+    /* Responsive large footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .footer-col {
+        padding-left: 0 !important;
+        text-align: center;
+    }
+    .footer-col p {
+        max-width: 100%;
+        margin: 0 auto 10px auto;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .footer-bottom-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .footer-bottom-links a {
+        margin-left: 0;
+    }
+    .btn-newsletter {
+        margin: 10px auto 0 auto;
+    }
 }
 
 @media (max-width: 480px) {

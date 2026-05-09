@@ -21,18 +21,27 @@
     </section>
 
     <div class="profil-container">
-        <table class="profil-table">
+        <!-- Search Bar -->
+        <div style="margin-bottom: 20px;">
+            <div style="position: relative; max-width: 350px; margin-left: auto;">
+                <input type="text" id="searchInput" placeholder="Cari nama anggota..." style="width: 100%; padding: 12px 15px; padding-left: 40px; border: 1px solid #ccc; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem; box-sizing: border-box; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+            </div>
+        </div>
+
+        <table class="profil-table" id="memberTable">
             <thead>
                 <tr>
-                    <th style="width: 50%;">NAMA</th>
+                    <th style="width: 35%;">NAMA</th>
+                    <th style="width: 20%;">NO. ANGGOTA</th>
                     <th style="width: 25%;">TINGKATAN</th>
-                    <th style="width: 25%;">STATUS</th>
+                    <th style="width: 20%;">STATUS</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($groupedMembers as $beltName => $members)
                     <tr class="belt-row">
-                        <td colspan="3">{{ $beltName }}</td>
+                        <td colspan="4">{{ $beltName }}</td>
                     </tr>
                     @foreach($members as $m)
                     <tr>
@@ -41,6 +50,7 @@
                                 {{ strtoupper($m->nama) }}
                             </a>
                         </td>
+                        <td data-label="NO. ANGGOTA">{{ $m->nomor_anggota ?? '-' }}</td>
                         <td data-label="TINGKATAN">{{ strtoupper($m->tingkatan_sabuk) === 'TINGKATAN' ? 'TINGKATAN' : strtoupper($m->tingkatan_sabuk) }}</td>
                         <td data-label="STATUS">
                             <span class="status-badge {{ $m->status == 'aktif' ? 'status-aktif' : 'status-nonaktif' }}">
@@ -53,7 +63,7 @@
 
                 @if(empty($groupedMembers))
                 <tr>
-                    <td colspan="3" style="text-align: center; padding: 30px; background-color: #fff;">Belum ada anggota yang terdaftar dengan sabuk.</td>
+                    <td colspan="4" style="text-align: center; padding: 30px; background-color: #fff;">Belum ada anggota yang terdaftar dengan sabuk.</td>
                 </tr>
                 @endif
             </tbody>
@@ -99,5 +109,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="{{ asset('js/beranda/profil.js') }}"></script>
 </body>
 </html>

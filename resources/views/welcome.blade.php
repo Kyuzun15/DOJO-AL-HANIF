@@ -196,6 +196,35 @@
         </div>
     </section>
 
+    <!-- JADWAL LATIHAN SECTION -->
+     {{-- - 
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">JADWAL LATIHAN</h2>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; background: white;">
+                    <tr style="background: #b31b1b; color: white;">
+                        <th style="padding: 15px; text-align: left;">Hari</th>
+                        <th style="padding: 15px; text-align: left;">Jam</th>
+                        <th style="padding: 15px; text-align: left;">Tempat</th>
+                    </tr>
+                    @forelse($jadwals as $jadwal)
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; font-weight: bold;">{{ $jadwal->hari }}</td>
+                        <td style="padding: 15px;">{{ \Carbon\Carbon::parse($jadwal->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($jadwal->jam_selesai)->format('H:i') }}</td>
+                        <td style="padding: 15px;">{{ $jadwal->tempat }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="3" style="padding: 15px; text-align: center;">Belum ada jadwal latihan.</td>
+                    </tr>
+                    @endforelse
+                </table>
+            </div>
+        </div>
+    </section>
+    --}}
+
     <!-- TEMPAT LATIHAN SECTION -->
     <section class="section-padding tempat-latihan-section">
         <div class="container">

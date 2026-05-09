@@ -12,7 +12,7 @@
         <a href="/admin/pengurus" class="link-back">&larr; Kembali ke Daftar Pengurus</a>
 
         <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 20px;">
-            <form action="/admin/pengurus/{{ $pengurus->id }}" method="POST">
+            <form action="/admin/pengurus/{{ $pengurus->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -58,6 +58,18 @@
                         <label class="form-label">Periode</label>
                         <input type="text" name="periode" class="form-input" value="{{ old('periode', $pengurus->periode) }}" required>
                     </div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label class="form-label">Foto Pengurus</label>
+                    <input type="file" name="foto" class="form-input" accept="image/*">
+                    @if($pengurus->foto)
+                        <div style="margin-top: 10px;">
+                            <img src="{{ asset('pengurus/' . $pengurus->foto) }}" alt="Foto Pengurus" style="max-height: 100px; border-radius: 8px; border: 1px solid #ccc;">
+                        </div>
+                    @else
+                        <small style="color: #666;">Belum ada foto.</small>
+                    @endif
                 </div>
 
                 <div style="margin-bottom: 15px;">

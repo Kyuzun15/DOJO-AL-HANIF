@@ -8,62 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
-    <style>
-        .hub-container {
-            max-width: 800px;
-            margin: 100px auto;
-            text-align: center;
-        }
-        .hub-title {
-            font-family: 'Montserrat', sans-serif;
-            color: #2c3e50;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-        }
-        .hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
-        }
-        .hub-card {
-            background: #fff;
-            padding: 40px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .hub-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        .hub-icon {
-            font-size: 4rem;
-            color: #c0392b;
-            margin-bottom: 20px;
-        }
-        .hub-icon.blue {
-            color: #2980b9;
-        }
-        .hub-card-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            margin: 0 0 10px 0;
-        }
-        .hub-card-desc {
-            font-family: 'Nunito', sans-serif;
-            color: #7f8c8d;
-            font-size: 1rem;
-        }
-        .logout-btn-container {
-            margin-top: 60px;
-        }
-    </style>
 </head>
 <body style="background-color: #f5f6fa;">
     <div class="hub-container">
@@ -92,6 +36,19 @@
                 <i class="fas fa-sitemap hub-icon" style="color: #8e44ad;"></i>
                 <h2 class="hub-card-title">Dashboard Struktur</h2>
                 <p class="hub-card-desc">Kelola susunan organisasi dan data pengurus dojo.</p>
+            </a>
+{{--  jadwal latihan
+            <a href="/admin/jadwal" class="hub-card">
+                <i class="fas fa-clock hub-icon" style="color: #e67e22;"></i>
+                <h2 class="hub-card-title">Jadwal Latihan</h2>
+                <p class="hub-card-desc">Atur hari, jam, dan tempat latihan dojo.</p>
+            </a>
+            --}}
+
+            <a href="/admin/absensi" class="hub-card">
+                <i class="fas fa-clipboard-list hub-icon" style="color: #16a085;"></i>
+                <h2 class="hub-card-title">Absensi Anggota</h2>
+                <p class="hub-card-desc">Kelola presensi kehadiran anggota aktif secara massal.</p>
             </a>
         </div>
 

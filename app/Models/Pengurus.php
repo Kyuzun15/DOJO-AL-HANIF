@@ -14,6 +14,7 @@ class Pengurus extends Model
         'nama_lengkap',
         'tingkatan',
         'nama_jabatan',
+        'foto',
         'periode',
         'prestasi_lomba',
         'prestasi_sertifikasi',

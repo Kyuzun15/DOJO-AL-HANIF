@@ -205,6 +205,16 @@
         border: none;
         border-bottom: 1px solid #e0e0e0;
     }
+    .profil-table td:first-child {
+        text-align: right;
+        padding-left: 40%;
+    }
+    .profil-table td a {
+        position: relative;
+        z-index: 2;
+        display: inline-block;
+        width: 100%;
+    }
     .profil-table td:last-child {
         border-bottom: none;
     }
@@ -219,6 +229,7 @@
         font-weight: 800;
         color: #555;
         font-size: 11px;
+        pointer-events: none; /* Prevent before element from blocking clicks */
     }
     
     /* Responsive large footer */

@@ -54,6 +54,7 @@ class AuthController extends Controller
             'sabuk' => 'Belum punya sabuk',
             'status' => 'aktif',
             'tanggal_diterima' => now(),
+            'nomor_anggota' => \App\Models\Member::generateNomorAnggota(),
         ]);
 
         $calon->delete();
@@ -132,6 +133,7 @@ class AuthController extends Controller
         // 2. Set default status dan tanggal
         $data['status'] = 'aktif';
         $data['tanggal_diterima'] = now();
+        $data['nomor_anggota'] = \App\Models\Member::generateNomorAnggota();
 
         // 3. Simpan ke database members
         $member = Member::create($data);

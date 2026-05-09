@@ -1,0 +1,225 @@
+.structure-container {
+    padding: 80px 20px;
+    background-color: #fff;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.header-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.header-subtitle {
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Organizational Tree CSS */
+.tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tree-row {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    position: relative;
+    width: 100%;
+}
+
+.member-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-bottom: 4px solid #b31b1b;
+    padding: 25px;
+    width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(179, 27, 27, 0.15);
+}
+
+/* Modal Details */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+.modal-card {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    background: #b31b1b;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.modal-close:hover { opacity: 1; }
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-body h3 {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+    font-size: 1.5rem;
+}
+
+.modal-body p.role {
+    color: #b31b1b;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.detail-value {
+    color: #444;
+    font-weight: 500;
+    white-space: pre-line;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.member-icon {
+    font-size: 1.5rem;
+    color: #b31b1b;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.member-role {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.member-name {
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Connecting Lines */
+.tree::before {
+    content: '';
+    position: absolute;
+    top: 100px;
+    bottom: 100px;
+    left: 50%;
+    width: 2px;
+    background: #b31b1b;
+    z-index: 1;
+    transform: translateX(-50%);
+}
+
+.tree-row::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: #b31b1b;
+    z-index: 1;
+}
+
+.tree-row:first-child::after {
+    display: none;
+}
+
+.vertical-line {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    height: 40px;
+    width: 2px;
+    background: #b31b1b;
+    transform: translateX(-50%);
+}
+
+@media (max-width: 992px) {
+    .tree-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    .tree-row::after, .tree::before, .vertical-line {
+        display: none;
+    }
+    .member-card {
+        width: 100%;
+        max-width: 320px;
+    }
+}

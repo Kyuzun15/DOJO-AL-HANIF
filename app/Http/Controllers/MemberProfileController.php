@@ -63,6 +63,8 @@ class MemberProfileController extends Controller
         // Extract year from tanggal_diterima
         $member->tahun_masuk = $member->tanggal_diterima ? $member->tanggal_diterima->format('Y') : '-';
         
-        return view('show-member', compact('member'));
+        $total_hadir = \App\Models\Absensi::where('member_id', $member->id)->where('status', 'hadir')->count();
+        
+        return view('show-member', compact('member', 'total_hadir'));
     }
 }

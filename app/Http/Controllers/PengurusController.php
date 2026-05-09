@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Models\Pengurus;
 
 class PengurusController extends Controller
@@ -45,6 +47,7 @@ class PengurusController extends Controller
             'periode' => 'required|string|max:255',
             'prestasi_lomba' => 'nullable|string',
             'prestasi_sertifikasi' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Mapping Nama Jabatan otomatis dari Kode Jabatan
@@ -58,6 +61,13 @@ class PengurusController extends Controller
         ];
 
         $validated['nama_jabatan'] = $mapping[$request->kode_jabatan] ?? 'PENGURUS';
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('pengurus'), $filename);
+            $validated['foto'] = $filename;
+        }
 
         Pengurus::create($validated);
 
@@ -87,6 +97,7 @@ class PengurusController extends Controller
             'periode' => 'required|string|max:255',
             'prestasi_lomba' => 'nullable|string',
             'prestasi_sertifikasi' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Mapping Nama Jabatan otomatis dari Kode Jabatan
@@ -101,6 +112,17 @@ class PengurusController extends Controller
 
         $validated['nama_jabatan'] = $mapping[$request->kode_jabatan] ?? 'PENGURUS';
 
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama
+            if ($pengurus->foto && File::exists(public_path('pengurus/' . $pengurus->foto))) {
+                File::delete(public_path('pengurus/' . $pengurus->foto));
+            }
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('pengurus'), $filename);
+            $validated['foto'] = $filename;
+        }
+
         $pengurus->update($validated);
 
         return redirect('/admin/pengurus')->with('success', 'Data pengurus berhasil diperbarui!');
@@ -112,6 +134,11 @@ class PengurusController extends Controller
     public function destroy($id)
     {
         $pengurus = Pengurus::findOrFail($id);
+        
+        if ($pengurus->foto && File::exists(public_path('pengurus/' . $pengurus->foto))) {
+            File::delete(public_path('pengurus/' . $pengurus->foto));
+        }
+
         $pengurus->delete();
 
         return redirect('/admin/pengurus')->with('success', 'Data pengurus berhasil dihapus!');

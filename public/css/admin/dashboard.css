@@ -303,3 +303,91 @@ div[style*="overflow-x: auto"] {
         margin-bottom: 5px;
     }
 }
+
+/* =========================================
+   3. HUB DASHBOARD & ABSENSI STYLES
+   ========================================= */
+.hub-container {
+    max-width: 800px;
+    margin: 100px auto;
+    text-align: center;
+}
+.hub-title {
+    font-family: 'Montserrat', sans-serif;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+.hub-card {
+    background: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hub-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.hub-icon {
+    font-size: 4rem;
+    color: #c0392b;
+    margin-bottom: 20px;
+}
+.hub-icon.blue {
+    color: #2980b9;
+}
+.hub-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+}
+.hub-card-desc {
+    font-family: 'Nunito', sans-serif;
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+.logout-btn-container {
+    margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .hub-container {
+        margin: 40px auto;
+    }
+    .hub-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    .hub-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .hub-card {
+        padding: 25px 15px;
+    }
+    .hub-icon {
+        font-size: 3rem;
+    }
+    .hub-card-title {
+        font-size: 1.2rem;
+    }
+    .logout-btn-container {
+        margin-top: 40px;
+    }
+}
+
+/* Absensi Styles */
+.radio-group { display: flex; gap: 10px; }
+.radio-group label { cursor: pointer; }

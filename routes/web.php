@@ -7,10 +7,13 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\MemberProfileController;
+use App\Http\Controllers\JadwalController;
+
 Route::get('/', function () { 
     $latestArticles = \App\Models\Artikel::orderBy('published_date', 'desc')->take(5)->get();
     $kegiatans = \App\Models\Kegiatan::where('event_date', '>=', now()->toDateString())->orderBy('event_date', 'asc')->get();
-    return view('welcome', compact('latestArticles', 'kegiatans')); 
+    $jadwals = \App\Models\Jadwal::all();
+    return view('welcome', compact('latestArticles', 'kegiatans', 'jadwals')); 
 });
 
 // Pendaftaran
@@ -77,4 +80,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pengurus/{id}/edit', [PengurusController::class, 'edit']);
     Route::put('/admin/pengurus/{id}', [PengurusController::class, 'update']);
     Route::delete('/admin/pengurus/{id}', [PengurusController::class, 'destroy']);
+
+    // Admin Jadwal
+    Route::get('/admin/jadwal', [JadwalController::class, 'adminIndex']);
+    Route::get('/admin/jadwal/create', [JadwalController::class, 'create']);
+    Route::post('/admin/jadwal', [JadwalController::class, 'store']);
+    Route::get('/admin/jadwal/{id}/edit', [JadwalController::class, 'edit']);
+    Route::put('/admin/jadwal/{id}', [JadwalController::class, 'update']);
+    Route::delete('/admin/jadwal/{id}', [JadwalController::class, 'destroy']);
+
+    // Admin Absensi
+    Route::get('/admin/absensi/rekap', [\App\Http\Controllers\AbsensiController::class, 'rekap']);
+    Route::get('/admin/absensi/export', [\App\Http\Controllers\AbsensiController::class, 'export']);
+    Route::get('/admin/absensi', [\App\Http\Controllers\AbsensiController::class, 'index']);
+    Route::post('/admin/absensi', [\App\Http\Controllers\AbsensiController::class, 'store']);
 });

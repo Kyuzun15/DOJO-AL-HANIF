@@ -95,7 +95,7 @@
             <div style="overflow-x: auto;">
                 <table>
                     <tr>
-                        <th>Nama & Sabuk</th>
+                        <th>Nama, No. Anggota & Sabuk</th>
                         <th>Tempat, Tgl Lahir</th>
                         <th>Umur / BB / TB / Baju</th>
                         <th>Orang Tua (No HP)</th>
@@ -107,6 +107,7 @@
                         <tr class="data-row">
                             <td>
                                 <strong style="font-size: 15px; color: #2c3e50;">{{ $a->nama }}</strong><br>
+                                <span style="font-size: 11px; color: #7f8c8d;">{{ $a->nomor_anggota ?? '-' }}</span><br>
                                 <span
                                     style="font-size: 12px; font-weight: bold; color: #fff; background: #ff0000ff; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 5px;">
                                     {{ $a->sabuk }}
@@ -150,7 +151,7 @@
             <div style="overflow-x: auto;">
                 <table>
                     <tr>
-                        <th>Nama & Sabuk</th>
+                        <th>Nama, No. Anggota & Sabuk</th>
                         <th>Tempat, Tgl Lahir</th>
                         <th>Umur / BB / TB / Baju</th>
                         <th>Orang Tua (No HP)</th>
@@ -162,6 +163,7 @@
                         <tr class="data-row" style="background-color: #fafafa;">
                             <td>
                                 <strong style="font-size: 15px; color: #000000ff;">{{ $t->nama }}</strong><br>
+                                <span style="font-size: 11px; color: #7f8c8d;">{{ $t->nomor_anggota ?? '-' }}</span><br>
                                 <span
                                     style="font-size: 12px; font-weight: bold; color: #ffffffff; background: #ff0000ff; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 5px;">
                                     {{ $t->sabuk }}
@@ -425,19 +427,6 @@
     @endforeach
 
     <script src="{{ asset('js/admin/dashboard.js') }}"></script>
-    <script>
-        function previewImage(input, previewId) {
-            const preview = document.getElementById(previewId);
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 </body>
 
 </html>

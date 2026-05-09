@@ -14,8 +14,29 @@ class Member extends Model
     protected $fillable = [
         'nama', 'foto', 'tempat_lahir', 'tanggal_lahir', 'berat_badan', 
         'tinggi_badan', 'nama_ayah', 'no_hp_ayah', 'nama_ibu', 
-        'no_hp_ibu', 'alamat', 'ukuran_baju', 'sabuk', 'status', 'tanggal_diterima', 'tanggal_dinonaktifkan'
+        'no_hp_ibu', 'alamat', 'ukuran_baju', 'sabuk', 'status', 'tanggal_diterima', 'tanggal_dinonaktifkan', 'nomor_anggota'
     ];
+
+    public static function generateNomorAnggota()
+    {
+        // Format: DAH-TAHUN-0001
+        $tahun = date('Y');
+        $lastMember = self::where('nomor_anggota', 'like', "DAH-{$tahun}-%")->orderBy('id', 'desc')->first();
+        
+        if ($lastMember && $lastMember->nomor_anggota) {
+            $parts = explode('-', $lastMember->nomor_anggota);
+            if (count($parts) == 3) {
+                $lastNumber = intval($parts[2]);
+                $nextNumber = $lastNumber + 1;
+            } else {
+                $nextNumber = 1;
+            }
+        } else {
+            $nextNumber = 1;
+        }
+
+        return 'DAH-' . $tahun . '-' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+    }
 
     public function setNoHpAyahAttribute($value)
     {
@@ -51,5 +72,10 @@ class Member extends Model
     public function prestasi()
     {
         return $this->hasMany(PrestasiMember::class);
+    }
+
+    public function absensi()
+    {
+        return $this->hasMany(Absensi::class);
     }
 }
