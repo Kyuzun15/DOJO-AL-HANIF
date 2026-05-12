@@ -74,8 +74,10 @@
                         <input type="text" name="nama_ayah" value="{{ old('nama_ayah') }}" required>
                     </div>
                     <div class="form-group">
-                        <label>No. HP Ayah</label>
-                        <input type="text" name="no_hp_ayah" value="{{ old('no_hp_ayah') }}" required>
+                        <label>No. HP Ayah <small>(Isi salah satu jika tidak ada)</small></label>
+                        <input type="tel" name="no_hp_ayah" value="{{ old('no_hp_ayah', '+62') }}" 
+                            placeholder="+628..." 
+                            oninput="if(!this.value.startsWith('+62')) this.value = '+62' + this.value.replace(/[^0-9]/g, ''); else this.value = '+62' + this.value.substring(3).replace(/[^0-9]/g, '');">
                     </div>
                 </div>
                 <div class="form-row">
@@ -84,8 +86,10 @@
                         <input type="text" name="nama_ibu" value="{{ old('nama_ibu') }}" required>
                     </div>
                     <div class="form-group">
-                        <label>No. HP Ibu</label>
-                        <input type="text" name="no_hp_ibu" value="{{ old('no_hp_ibu') }}" required>
+                        <label>No. HP Ibu <small>(Isi salah satu jika tidak ada)</small></label>
+                        <input type="tel" name="no_hp_ibu" value="{{ old('no_hp_ibu', '+62') }}" 
+                            placeholder="+628..." 
+                            oninput="if(!this.value.startsWith('+62')) this.value = '+62' + this.value.replace(/[^0-9]/g, ''); else this.value = '+62' + this.value.substring(3).replace(/[^0-9]/g, '');">
                     </div>
                 </div>
             </fieldset>
@@ -112,13 +116,7 @@
     <!-- Flatpickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
-    <script>
-        flatpickr("input[name='tanggal_lahir']", {
-            dateFormat: "d/m/Y",
-            allowInput: true,
-            locale: "id"
-        });
-    </script>
+    <script src="{{ asset('js/pendaftaran/daftar.js') }}"></script>
 </body>
 
 </html>

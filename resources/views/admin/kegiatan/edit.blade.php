@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Kegiatan - DOJO AL-HANIF</title>
     <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
-    <style>
-        .ck-editor__editable_inline {
-            min-height: 400px;
-            font-size: 16px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/admin/editor-form.css') }}">
 </head>
 <body>
     <div class="container" style="max-width: 900px;">
@@ -72,14 +64,6 @@
 
     <!-- CKEditor 5 CDN -->
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'undo', 'redo' ]
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+    <script src="{{ asset('js/admin/ckeditor-init.js') }}"></script>
 </body>
 </html>

@@ -12,19 +12,7 @@
     
     <link rel="stylesheet" href="{{ asset('css/beranda/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/beranda/show-artikel.css') }}">
-    <style>
-        .agenda-meta {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            color: #555;
-            font-size: 1.1rem;
-        }
-        .agenda-meta i {
-            color: #d12e2e;
-            margin-right: 8px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/kegiatan/show.css') }}">
 </head>
 <body>
     @include('partials.navbar')
