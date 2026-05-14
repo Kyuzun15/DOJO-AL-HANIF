@@ -14,6 +14,7 @@
         <h1 class="hub-title">Pusat Kendali DOJO AL-HANIF</h1>
         
         <div class="hub-grid">
+            @if(auth()->user()->role !== 'tier_2')
             <a href="/admin/anggota" class="hub-card">
                 <i class="fas fa-users hub-icon blue"></i>
                 <h2 class="hub-card-title">Dashboard Anggota</h2>
@@ -43,12 +44,18 @@
                 <h2 class="hub-card-title">Jadwal Latihan</h2>
                 <p class="hub-card-desc">Atur hari, jam, dan tempat latihan dojo.</p>
             </a>
-            
+            @endif
 
             <a href="/admin/absensi" class="hub-card">
                 <i class="fas fa-clipboard-list hub-icon" style="color: #16a085;"></i>
                 <h2 class="hub-card-title">Absensi Anggota</h2>
                 <p class="hub-card-desc">Kelola presensi kehadiran anggota aktif secara massal.</p>
+            </a>
+
+            <a href="/admin/profile" class="hub-card">
+                <i class="fas fa-user-shield hub-icon" style="color: #34495e;"></i>
+                <h2 class="hub-card-title">Profil Admin</h2>
+                <p class="hub-card-desc">Kelola akun admin dan hak akses tier.</p>
             </a>
         </div>
 

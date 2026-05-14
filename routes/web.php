@@ -40,8 +40,16 @@ Route::post('/pintu-rahasia', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 // Dashboard Admin
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'restrict.tier2'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'mainDashboard']);
+    
+    // Profil Admin
+    Route::get('/admin/profile', [\App\Http\Controllers\AdminProfileController::class, 'index']);
+    Route::get('/admin/profile/create', [\App\Http\Controllers\AdminProfileController::class, 'create']);
+    Route::post('/admin/profile', [\App\Http\Controllers\AdminProfileController::class, 'store']);
+    Route::get('/admin/profile/{id}/edit', [\App\Http\Controllers\AdminProfileController::class, 'edit']);
+    Route::put('/admin/profile/{id}', [\App\Http\Controllers\AdminProfileController::class, 'update']);
+    Route::delete('/admin/profile/{id}', [\App\Http\Controllers\AdminProfileController::class, 'destroy']);
     Route::get('/admin/anggota', [AuthController::class, 'dashboard']);
     
     // Calon
