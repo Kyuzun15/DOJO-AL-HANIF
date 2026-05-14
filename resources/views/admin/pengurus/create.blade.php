@@ -21,11 +21,11 @@
                         <select name="kode_jabatan" class="form-input" required>
                             <option value="">-- Pilih Jabatan --</option>
                             <option value="ketua" {{ old('kode_jabatan') == 'ketua' ? 'selected' : '' }}>KETUA</option>
-                            <option value="bendahara" {{ old('kode_jabatan') == 'bendahara' ? 'selected' : '' }}>BENDAHARA</option>
                             <option value="sekretaris" {{ old('kode_jabatan') == 'sekretaris' ? 'selected' : '' }}>SEKRETARIS</option>
-                            <option value="bimbingan_presiden_1" {{ old('kode_jabatan') == 'bimbingan_presiden_1' ? 'selected' : '' }}>BIMBINGAN PRESTASI (KETUA)</option>
-                            <option value="bidang_usaha" {{ old('kode_jabatan') == 'bidang_usaha' ? 'selected' : '' }}>BIDANG USAHA </option>
-                            <option value="bimbingan_presiden_2" {{ old('kode_jabatan') == 'bimbingan_presiden_2' ? 'selected' : '' }}>BIMBINGAN PRESTASI (WAKIL KETUA)</option>
+                            <option value="bendahara" {{ old('kode_jabatan') == 'bendahara' ? 'selected' : '' }}>BENDAHARA</option>
+                            <option value="bimbingan_prestasi" {{ old('kode_jabatan') == 'bimbingan_prestasi' ? 'selected' : '' }}>BIMBINGAN PRESTASI</option>
+                            <option value="bidang_usaha" {{ old('kode_jabatan') == 'bidang_usaha' ? 'selected' : '' }}>BIDANG USAHA</option>
+                            <option value="ukt_gasuku" {{ old('kode_jabatan') == 'ukt_gasuku' ? 'selected' : '' }}>UKT & GASUKU</option>
                         </select>
                         @error('kode_jabatan') <small style="color: red;">{{ $message }}</small> @enderror
                     </div>
@@ -54,6 +54,10 @@
                     <div style="flex: 1;">
                         <label class="form-label">Nama Lengkap</label>
                         <input type="text" name="nama_lengkap" class="form-input" placeholder="Nama lengkap pengurus" value="{{ old('nama_lengkap') }}" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label class="form-label">Sub Jabatan (Opsional)</label>
+                        <input type="text" name="sub_jabatan" class="form-input" placeholder="Contoh: Ketua Divisi, Anggota" value="{{ old('sub_jabatan') }}">
                     </div>
                     <div style="flex: 1;">
                         <label class="form-label">Periode</label>

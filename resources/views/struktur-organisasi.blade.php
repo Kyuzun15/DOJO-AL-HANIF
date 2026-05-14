@@ -20,7 +20,62 @@
         <p class="header-subtitle">Susunan pengurus DOJO AL-HANIF periode saat ini yang berdedikasi tinggi dalam pengembangan karakter dan prestasi bela diri.</p>
 
         <div class="tree" id="orgTree">
-            <!-- Data will be populated by JavaScript -->
+            <!-- Level 1: Ketua -->
+            <div class="tree-row">
+                <div class="member-card" onclick="openBio('ketua')">
+                    <i class="fas fa-user-tie member-icon"></i>
+                    <div class="member-role">KETUA</div>
+                    <div class="member-name">{{ isset($pengurus['ketua']) ? $pengurus['ketua']->pluck('nama_lengkap')->implode(', ') : '-' }}</div>
+                </div>
+            </div>
+
+            <!-- Level 2: Bendahara & Sekretaris -->
+            <div class="tree-row">
+                <div style="position: relative;">
+                    <div class="vertical-line"></div>
+                    <div class="member-card" onclick="openBio('bendahara')">
+                        <i class="fas fa-wallet member-icon"></i>
+                        <div class="member-role">BENDAHARA</div>
+                        <div class="member-name">{{ isset($pengurus['bendahara']) ? $pengurus['bendahara']->pluck('nama_lengkap')->implode(', ') : '-' }}</div>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div class="vertical-line"></div>
+                    <div class="member-card" onclick="openBio('sekretaris')">
+                        <i class="fas fa-file-signature member-icon"></i>
+                        <div class="member-role">SEKRETARIS</div>
+                        <div class="member-name">{{ isset($pengurus['sekretaris']) ? $pengurus['sekretaris']->pluck('nama_lengkap')->implode(', ') : '-' }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 3: Bidang-Bidang -->
+            <div class="tree-row">
+                <div style="position: relative;">
+                    <div class="vertical-line"></div>
+                    <div class="member-card" onclick="openBio('ukt_gasuku')">
+                        <i class="fas fa-fist-raised member-icon"></i>
+                        <div class="member-role">UKT & GASUKU</div>
+                        <div class="member-name">{{ isset($pengurus['ukt_gasuku']) ? $pengurus['ukt_gasuku']->pluck('nama_lengkap')->implode(', ') : '-' }}</div>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div class="vertical-line"></div>
+                    <div class="member-card" onclick="openBio('bimbingan_prestasi')">
+                        <i class="fas fa-trophy member-icon"></i>
+                        <div class="member-role">BIMBINGAN PRESTASI</div>
+                        <div class="member-name">{{ isset($pengurus['bimbingan_prestasi']) ? $pengurus['bimbingan_prestasi']->pluck('nama_lengkap')->implode(', ') : '-' }}</div>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div class="vertical-line"></div>
+                    <div class="member-card" onclick="openBio('bidang_usaha')">
+                        <i class="fas fa-briefcase member-icon"></i>
+                        <div class="member-role">BIDANG USAHA</div>
+                        <div class="member-name">{{ isset($pengurus['bidang_usaha']) ? $pengurus['bidang_usaha']->pluck('nama_lengkap')->implode(', ') : '-' }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -34,7 +89,7 @@
             </div>
             <div class="modal-body">
                 <h3 id="modalName">-</h3>
-                <p class="role" id="modalRole">-</p>
+                <p class="role"><span id="modalRoleText">-</span> <span id="modalSubJabatan" style="font-size: 0.9em; font-weight: normal; margin-left: 5px;"></span></p>
                 
                 <div class="detail-item">
                     <span class="detail-label">Tingkatan / Sabuk</span>
@@ -52,6 +107,11 @@
                     <span class="detail-label">Sertifikasi & Lisensi</span>
                     <span class="detail-value" id="modalSertif">-</span>
                 </div>
+
+                <div class="modal-slider-controls" id="modalSliderControls" style="display:flex; justify-content:space-between; margin-top: 20px;">
+                    <button class="btn btn-red btn-sm" onclick="prevBio()" style="padding: 5px 15px;">&laquo; Prev</button>
+                    <button class="btn btn-red btn-sm" onclick="nextBio()" style="padding: 5px 15px;">Next &raquo;</button>
+                </div>
             </div>
         </div>
     </div>
@@ -60,8 +120,8 @@
 
     <script>
         // Data dari Laravel Backend
-        const rawData = @json($pengurus);
+        const biodataGroup = @json($pengurus);
     </script>
-    <script src="{{ asset('js/beranda/struktur.js') }}"></script>
+    <script src="{{ asset('js/beranda/struktur.js') }}?v={{ time() }}"></script>
 </body>
 </html>

@@ -37,13 +37,13 @@
                 <h2 class="hub-card-title">Dashboard Struktur</h2>
                 <p class="hub-card-desc">Kelola susunan organisasi dan data pengurus dojo.</p>
             </a>
-{{--  jadwal latihan
+
             <a href="/admin/jadwal" class="hub-card">
                 <i class="fas fa-clock hub-icon" style="color: #e67e22;"></i>
                 <h2 class="hub-card-title">Jadwal Latihan</h2>
                 <p class="hub-card-desc">Atur hari, jam, dan tempat latihan dojo.</p>
             </a>
-            --}}
+            
 
             <a href="/admin/absensi" class="hub-card">
                 <i class="fas fa-clipboard-list hub-icon" style="color: #16a085;"></i>

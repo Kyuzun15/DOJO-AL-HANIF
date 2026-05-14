@@ -345,7 +345,10 @@ a {
 }
 
 /* SECTION TUJUAN & BENEFIT */
-.tujuan-benefit-wrapper {
+.tujuan-wrapper {
+    background-color: var(--dark-bg);
+}
+.benefit-wrapper {
     background-color: white;
 }
 .tujuan-section {
@@ -359,19 +362,20 @@ a {
     margin-top: 30px;
 }
 .tujuan-item {
-    background-color: var(--dark-bg);
+    background-color: white; /* Ubah card jadi putih */
     padding: 20px;
     border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 .tujuan-num {
-    color: var(--primary-red);
+    color: var(--primary-red); /* Merah tetap merah */
     font-weight: 800;
     font-size: 1.1rem;
     margin-bottom: 10px;
     display: block;
 }
 .tujuan-item p {
-    color: white;
+    color: var(--text-dark); /* Teks jadi gelap karena card putih */
     font-size: 0.85rem;
     line-height: 1.5;
     text-align: justify;
@@ -793,4 +797,81 @@ a {
     .maps-container iframe {
         height: 250px;
     }
+}
+
+/* JADWAL TIMELINE */
+.jadwal-timeline-wrapper {
+    position: relative;
+    user-select: none;
+    width: 100%;
+}
+.jadwal-timeline {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    padding: 20px 0;
+    margin: 0;
+}
+.jadwal-timeline .timeline-node {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 25px; /* space for day text */
+}
+.jadwal-timeline .timeline-node:nth-child(odd) {
+    margin-top: 0;
+}
+.jadwal-timeline .timeline-node:nth-child(even) {
+    margin-top: 40px; /* offset for zigzag */
+}
+.jadwal-timeline .timeline-day {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.jadwal-timeline .timeline-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    border: 3px solid #b31b1b;
+    transition: all 0.3s ease;
+}
+.jadwal-timeline .timeline-circle.active {
+    background-color: #b31b1b;
+    box-shadow: 0 0 10px rgba(179, 27, 27, 0.4);
+}
+.jadwal-timeline .timeline-times {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    min-height: 20px;
+}
+.jadwal-timeline .timeline-time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #b31b1b;
+    text-align: center;
+}
+.jadwal-timeline .timeline-time.empty {
+    color: #aaa;
+}
+
+@media (max-width: 500px) {
+    .jadwal-timeline .timeline-day { font-size: 0.6rem; }
+    .jadwal-timeline .timeline-circle { width: 20px; height: 20px; }
+    .jadwal-timeline .timeline-time { font-size: 0.7rem; }
 }

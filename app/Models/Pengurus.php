@@ -11,6 +11,7 @@ class Pengurus extends Model
 
     protected $fillable = [
         'kode_jabatan',
+        'sub_jabatan',
         'nama_lengkap',
         'tingkatan',
         'nama_jabatan',

@@ -132,8 +132,8 @@
         </div>
     </section>
 
-    <!-- TUJUAN & BENEFIT SECTION -->
-    <section class="section-padding tujuan-benefit-wrapper">
+    <!-- TUJUAN SECTION -->
+    <section class="section-padding tujuan-wrapper">
         <div class="container">
             <div class="tujuan-section">
                 <h2 class="section-title" style="margin-bottom: 30px;">TUJUAN</h2>
@@ -172,10 +172,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="benefit-section">
+    <!-- BENEFIT SECTION -->
+    <section class="section-padding benefit-wrapper">
+        <div class="container">
+            <div class="benefit-section" style="margin-top: 0;">
                 <h2 class="section-title">BENEFIT</h2>
-                <div class="benefit-grid">
+                <div class="benefit-grid" style="margin-top: 30px;">
                     <div class="benefit-card">
                         <div class="benefit-icon"><i class="fas fa-star"></i></div>
                         <h3>PRESTASI</h3>
@@ -196,46 +201,56 @@
         </div>
     </section>
 
-    <!-- JADWAL LATIHAN SECTION -->
-     {{-- - 
-    <section class="section-padding">
+    <!-- TEMPAT LATIHAN & JADWAL SECTION -->
+    <section class="section-padding tempat-latihan-section" style="background: #fdfdfd;">
         <div class="container">
-            <h2 class="section-title">JADWAL LATIHAN</h2>
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; background: white;">
-                    <tr style="background: #b31b1b; color: white;">
-                        <th style="padding: 15px; text-align: left;">Hari</th>
-                        <th style="padding: 15px; text-align: left;">Jam</th>
-                        <th style="padding: 15px; text-align: left;">Tempat</th>
-                    </tr>
-                    @forelse($jadwals as $jadwal)
-                    <tr style="border-bottom: 1px solid #eee;">
-                        <td style="padding: 15px; font-weight: bold;">{{ $jadwal->hari }}</td>
-                        <td style="padding: 15px;">{{ \Carbon\Carbon::parse($jadwal->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($jadwal->jam_selesai)->format('H:i') }}</td>
-                        <td style="padding: 15px;">{{ $jadwal->tempat }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3" style="padding: 15px; text-align: center;">Belum ada jadwal latihan.</td>
-                    </tr>
-                    @endforelse
-                </table>
-            </div>
-        </div>
-    </section>
-    --}}
-
-    <!-- TEMPAT LATIHAN SECTION -->
-    <section class="section-padding tempat-latihan-section">
-        <div class="container">
-            <h2 class="section-title">TEMPAT LATIHAN</h2>
-            <a href="https://maps.app.goo.gl/BK1L5HAc82auVXNM7" target="_blank" class="maps-container">
-                <div class="maps-content">
-                    <i class="fas fa-map-location-dot"></i>
-                    <p>Klik untuk membuka lokasi kami di Google Maps</p>
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">TEMPAT & JADWAL LATIHAN</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: stretch;">
+                
+                <!-- MAPS -->
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column;">
+                    <a href="https://maps.app.goo.gl/BK1L5HAc82auVXNM7" target="_blank" class="maps-container" style="margin-top: 0; flex: 1; height: 100%; min-height: 350px;">
+                        <div class="maps-content">
+                            <i class="fas fa-map-location-dot"></i>
+                            <p>Klik untuk membuka lokasi kami di Google Maps</p>
+                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5626969057434!2d107.0169!3d-6.2349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698a8f8f8f8f8f%3A0x8f8f8f8f8f8f8f8f!2sDojo%20Al-Hanif!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="100%" style="border:0; min-height: 350px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </a>
                 </div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5626969057434!2d107.0169!3d-6.2349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698a8f8f8f8f8f%3A0x8f8f8f8f8f8f8f8f!2sDojo%20Al-Hanif!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </a>
+
+                <!-- JADWAL TIMELINE -->
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column;">
+                    <div class="jadwal-timeline-wrapper" style="background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 30px 10px; flex: 1; display: flex; align-items: center; border: 1px solid #eee; overflow: hidden;">
+                        <div class="jadwal-timeline">
+                            <svg class="timeline-zigzag-line" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
+                                <polyline points="7.14%,38 21.42%,78 35.71%,38 50%,78 64.28%,38 78.57%,78 92.85%,38" fill="none" stroke="#d32f2f" stroke-width="3" stroke-linejoin="round"/>
+                            </svg>
+                            @php
+                                $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                            @endphp
+                            @foreach($days as $day)
+                                @php
+                                    $jadwalHariIni = $jadwals->where('hari', $day);
+                                @endphp
+                                <div class="timeline-node">
+                                    <div class="timeline-day">{{ $day }}</div>
+                                    <div class="timeline-circle {{ $jadwalHariIni->isNotEmpty() ? 'active' : '' }}"></div>
+                                    <div class="timeline-times">
+                                        @if($jadwalHariIni->isNotEmpty())
+                                            @foreach($jadwalHariIni as $j)
+                                                <div class="timeline-time">{{ \Carbon\Carbon::parse($j->jam_mulai)->format('H.i') }}</div>
+                                            @endforeach
+                                        @else
+                                            <div class="timeline-time empty">-</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 

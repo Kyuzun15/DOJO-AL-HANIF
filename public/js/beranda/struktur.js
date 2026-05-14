@@ -1,74 +1,33 @@
-// Mapping data ke posisi
-const biodata = {
-    ketua: rawData.find(p => p.kode_jabatan === 'ketua'),
-    bendahara: rawData.find(p => p.kode_jabatan === 'bendahara'),
-    sekretaris: rawData.find(p => p.kode_jabatan === 'sekretaris'),
-    bimbingan_presiden_1: rawData.find(p => p.kode_jabatan === 'bimbingan_presiden_1'),
-    bidang_usaha: rawData.find(p => p.kode_jabatan === 'bidang_usaha'),
-    bimbingan_presiden_2: rawData.find(p => p.kode_jabatan === 'bimbingan_presiden_2'),
-};
+let currentGroup = [];
+let currentIndex = 0;
 
-const treeContainer = document.getElementById('orgTree');
-
-// Template Generator
-function createCard(data, icon, fallbackRole) {
-    const hasData = data && data.nama_lengkap;
-    const name = hasData ? data.nama_lengkap : '-';
-    const role = hasData ? data.nama_jabatan : fallbackRole;
-    const onClickAttr = hasData ? `onclick="showDetail('${data.kode_jabatan}')"` : '';
-
-    return `
-        <div class="member-card" ${onClickAttr}>
-            <i class="fas ${icon} member-icon"></i>
-            <div class="member-role">${role}</div>
-            <div class="member-name">${name}</div>
-        </div>
-    `;
+function openBio(kode_jabatan) {
+    if (biodataGroup[kode_jabatan] && biodataGroup[kode_jabatan].length > 0) {
+        currentGroup = biodataGroup[kode_jabatan];
+        currentIndex = 0;
+        renderBio();
+        document.getElementById('detailModal').style.display = 'flex';
+    } else {
+        alert("Belum ada data pengurus untuk jabatan ini. Silakan tambahkan melalui halaman Admin.");
+    }
 }
 
-// Render Tree
-treeContainer.innerHTML = `
-    <!-- Level 1: Ketua -->
-    <div class="tree-row">
-        ${createCard(biodata.ketua, 'fa-user-tie', 'KETUA')}
-    </div>
-
-    <!-- Level 2: Bendahara & Sekretaris -->
-    <div class="tree-row">
-        <div style="position: relative;">
-            <div class="vertical-line"></div>
-            ${createCard(biodata.bendahara, 'fa-wallet', 'BENDAHARA')}
-        </div>
-        <div style="position: relative;">
-            <div class="vertical-line"></div>
-            ${createCard(biodata.sekretaris, 'fa-file-signature', 'SEKRETARIS')}
-        </div>
-    </div>
-
-    <!-- Level 3: Bidang-Bidang -->
-    <div class="tree-row">
-        <div style="position: relative;">
-            <div class="vertical-line"></div>
-            ${createCard(biodata.bimbingan_presiden_1, 'fa-trophy', 'BIMBINGAN PRESTASI (KETUA)')}
-        </div>
-        <div style="position: relative;">
-            <div class="vertical-line"></div>
-            ${createCard(biodata.bidang_usaha, 'fa-briefcase', 'BIDANG USAHA')}
-        </div>
-        <div style="position: relative;">
-            <div class="vertical-line"></div>
-            ${createCard(biodata.bimbingan_presiden_2, 'fa-medal', 'BIMBINGAN PRESTASI (WAKIL KETUA)')}
-        </div>
-    </div>
-`;
-
-// Interactivity Functions
-function showDetail(kode) {
-    const data = rawData.find(p => p.kode_jabatan === kode);
-    if(!data) return;
-
+function renderBio() {
+    if (currentGroup.length === 0) return;
+    const data = currentGroup[currentIndex];
+    
     document.getElementById('modalName').innerText = data.nama_lengkap;
-    document.getElementById('modalRole').innerText = data.nama_jabatan;
+    document.getElementById('modalRoleText').innerText = data.nama_jabatan;
+    
+    const subJabatanEl = document.getElementById('modalSubJabatan');
+    if (data.sub_jabatan) {
+        subJabatanEl.innerText = `(${data.sub_jabatan})`;
+        subJabatanEl.style.display = 'inline';
+    } else {
+        subJabatanEl.style.display = 'none';
+        subJabatanEl.innerText = '';
+    }
+
     document.getElementById('modalBelt').innerText = data.tingkatan || '-';
     document.getElementById('modalPeriod').innerText = data.periode || '-';
     document.getElementById('modalLomba').innerText = data.prestasi_lomba || 'Belum ada data prestasi lomba.';
@@ -83,7 +42,25 @@ function showDetail(kode) {
         document.getElementById('modalIcon').style.display = 'inline-block';
     }
 
-    document.getElementById('detailModal').style.display = 'flex';
+    // Toggle slider controls visibility
+    const controls = document.getElementById('modalSliderControls');
+    if (currentGroup.length > 1) {
+        controls.style.display = 'flex';
+    } else {
+        controls.style.display = 'none';
+    }
+}
+
+function nextBio() {
+    if (currentGroup.length <= 1) return;
+    currentIndex = (currentIndex + 1) % currentGroup.length;
+    renderBio();
+}
+
+function prevBio() {
+    if (currentGroup.length <= 1) return;
+    currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+    renderBio();
 }
 
 function closeDetail() {

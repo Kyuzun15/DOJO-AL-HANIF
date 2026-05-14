@@ -14,7 +14,7 @@ class PengurusController extends Controller
      */
     public function index()
     {
-        $pengurus = Pengurus::all();
+        $pengurus = Pengurus::all()->groupBy('kode_jabatan');
         return view('struktur-organisasi', compact('pengurus'));
     }
 
@@ -41,7 +41,8 @@ class PengurusController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kode_jabatan' => 'required|string|unique:penguruses,kode_jabatan',
+            'kode_jabatan' => 'required|string',
+            'sub_jabatan' => 'nullable|string|max:255',
             'nama_lengkap' => 'required|string|max:255',
             'tingkatan' => 'required|string|max:255',
             'periode' => 'required|string|max:255',
@@ -58,6 +59,7 @@ class PengurusController extends Controller
             'bimbingan_presiden_1' => 'BIMBINGAN PRESIDEN',
             'bidang_usaha' => 'BIDANG USAHA',
             'bimbingan_presiden_2' => 'BIMBINGAN PRESIDEN',
+            'ukt_gasuku' => 'UKT & GASUKU',
         ];
 
         $validated['nama_jabatan'] = $mapping[$request->kode_jabatan] ?? 'PENGURUS';
@@ -91,7 +93,8 @@ class PengurusController extends Controller
         $pengurus = Pengurus::findOrFail($id);
 
         $validated = $request->validate([
-            'kode_jabatan' => 'required|string|unique:penguruses,kode_jabatan,' . $id,
+            'kode_jabatan' => 'required|string',
+            'sub_jabatan' => 'nullable|string|max:255',
             'nama_lengkap' => 'required|string|max:255',
             'tingkatan' => 'required|string|max:255',
             'periode' => 'required|string|max:255',
@@ -108,6 +111,7 @@ class PengurusController extends Controller
             'bimbingan_presiden_1' => 'BIMBINGAN PRESIDEN',
             'bidang_usaha' => 'BIDANG USAHA',
             'bimbingan_presiden_2' => 'BIMBINGAN PRESIDEN',
+            'ukt_gasuku' => 'UKT & GASUKU',
         ];
 
         $validated['nama_jabatan'] = $mapping[$request->kode_jabatan] ?? 'PENGURUS';
